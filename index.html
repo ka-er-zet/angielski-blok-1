@@ -1,0 +1,1278 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sprawdzian z angielskiego</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22 font-size=%2280%22><text y=%2280%22>%F0%9F%93%98</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  /* Układ: jedna karta na środku (jak w sprawdzianach z matmy, przyrody, historii i polskiego); kolory jak w podręczniku */
+  :root{
+    --bg1:#fdeef0; --bg2:#eaf0fb; --card:#ffffff; --ink:#1f2340; --muted:#5b6185; --line:#d5d9ec; --soft:#f5f6fc;
+    --primary:#c8102e; --primary-dark:#9e0c24; --primary-soft:#fde3e7; --on-primary:#ffffff;
+    --blue:#1d4ed8; --blue-soft:#e0e9fd;
+    --good:#15803d; --good-soft:#dcfce7; --bad:#dc2626; --bad-soft:#fee2e2;
+    --half:#b45309; --half-soft:#fef3c7;
+    --warn-soft:#fef6d8; --warn-line:#f3dd8c; --warn-ink:#6b4a0c;
+    --e1:#e08a2c; --e2:#3aa58a; --e3:#9a6cc4; --e4:#2a9fc2;
+    --shadow:0 10px 30px rgba(158,12,36,.12);
+  }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+    --bg1:#1d1218; --bg2:#121a2a; --card:#1c2140; --ink:#e6e8f5; --muted:#a3a9c9; --line:#363d68; --soft:#232a4f;
+    --primary:#ff8095; --primary-dark:#ffa3b2; --primary-soft:#4a1d2a; --on-primary:#12152a;
+    --blue:#8fb0ff; --blue-soft:#1e2c5a;
+    --good:#4ade80; --good-soft:#153823; --bad:#f87171; --bad-soft:#3f1d1d;
+    --half:#fbbf24; --half-soft:#3a2c0c;
+    --warn-soft:#352b10; --warn-line:#5e4a17; --warn-ink:#fcd88a;
+    --shadow:0 10px 30px rgba(0,0,0,.35); color-scheme:dark;
+  }}
+  :root[data-theme="dark"]{
+    --bg1:#1d1218; --bg2:#121a2a; --card:#1c2140; --ink:#e6e8f5; --muted:#a3a9c9; --line:#363d68; --soft:#232a4f;
+    --primary:#ff8095; --primary-dark:#ffa3b2; --primary-soft:#4a1d2a; --on-primary:#12152a;
+    --blue:#8fb0ff; --blue-soft:#1e2c5a;
+    --good:#4ade80; --good-soft:#153823; --bad:#f87171; --bad-soft:#3f1d1d;
+    --half:#fbbf24; --half-soft:#3a2c0c;
+    --warn-soft:#352b10; --warn-line:#5e4a17; --warn-ink:#fcd88a;
+    --shadow:0 10px 30px rgba(0,0,0,.35); color-scheme:dark;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;min-height:100vh;
+    font-family:'Quicksand','Trebuchet MS',-apple-system,sans-serif;
+    background:var(--bg1);
+    background-image:linear-gradient(160deg,var(--bg1),var(--bg2));
+    color:var(--ink);padding:16px;
+  }
+  .wrap{max-width:660px;margin:0 auto;}
+  header{text-align:center;margin-bottom:18px;}
+  h1{font-size:1.7rem;margin:0 0 4px;text-wrap:balance;}
+  .subtitle{margin:0;color:var(--muted);}
+  .flag-bar{display:flex;height:8px;border-radius:6px;overflow:hidden;margin:12px auto 4px;max-width:300px;}
+  .flag-bar span{display:block;flex:1;}
+  .card{background:var(--card);border-radius:24px;padding:24px;box-shadow:var(--shadow);text-align:center;}
+  @media (max-width:420px){ .card{padding:18px 14px;} }
+  .primary-btn{background:var(--primary);color:var(--on-primary);border:none;border-radius:14px;padding:14px 28px;font-size:1.1rem;font-weight:700;cursor:pointer;margin-top:16px;font-family:inherit;transition:transform .15s, background .15s;}
+  .primary-btn:hover{background:var(--primary-dark);transform:translateY(-2px);}
+  .primary-btn:disabled{opacity:.5;cursor:default;transform:none;}
+  .gold-btn{background:var(--e1);color:#1f1400;}
+  .gold-btn:hover{background:var(--e1);filter:brightness(1.08);}
+  .start-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+  .full-box{background:var(--primary-soft);border:2px solid var(--primary);border-radius:16px;padding:16px;margin-bottom:18px;text-align:center;}
+  .full-box .primary-btn{margin-top:0;font-size:1.2rem;}
+  .full-box p{margin:10px 0 0;font-size:.9rem;color:var(--muted);line-height:1.45;}
+  .rules{text-align:left;background:var(--warn-soft);border:1px solid var(--warn-line);color:var(--warn-ink);border-radius:14px;padding:12px 14px;margin:14px 0 18px;font-size:.92rem;line-height:1.5;}
+  .rules ul{margin:6px 0 0;padding-left:20px;}
+  .or-line{text-align:left;font-weight:700;margin:0 0 8px;}
+  #timer{font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap;padding:2px 10px;border-radius:999px;background:var(--soft);border:2px solid var(--line);}
+  #timer.low{border-color:var(--e1);color:var(--e1);}
+  #timer.out{border-color:var(--bad);color:var(--bad);}
+  .progress-row{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+  .progress-bar{flex:1;height:10px;background:var(--line);border-radius:6px;overflow:hidden;}
+  .progress-fill{height:100%;background:var(--primary);transition:width .3s;width:0;}
+  #progress-text{font-size:.85rem;color:var(--muted);white-space:nowrap;}
+  .score-row{text-align:right;font-weight:700;color:var(--primary);margin-bottom:4px;font-variant-numeric:tabular-nums;}
+  .q-number{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--primary-dark);background:var(--primary-soft);border-radius:8px;padding:3px 12px;margin-bottom:10px;}
+  .q-pts{display:inline-block;font-size:.72rem;font-weight:800;color:var(--blue);background:var(--blue-soft);border-radius:8px;padding:3px 10px;margin-left:6px;}
+  .q-instruction{font-size:1.08rem;font-weight:700;margin:8px 0;text-align:left;text-wrap:pretty;}
+  .q-sub{font-size:.92rem;color:var(--muted);margin:0 0 6px;text-align:left;}
+  .en{font-style:italic;}
+  .word-box{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:10px 0;padding:10px;border:2px dashed var(--line);border-radius:12px;font-weight:800;}
+  .word-box span{background:var(--soft);border-radius:8px;padding:3px 10px;}
+  .options{display:grid;gap:10px;margin-top:16px;grid-template-columns:repeat(2,1fr);}
+  .options.one-col{grid-template-columns:1fr;}
+  @media (max-width:420px){ .options{grid-template-columns:1fr;} }
+  .opt-btn{border:2px solid var(--line);background:var(--soft);border-radius:14px;padding:12px;font-size:1.02rem;font-weight:700;cursor:pointer;font-family:inherit;color:var(--ink);transition:all .15s;}
+  .opt-btn:hover:not(:disabled){border-color:var(--primary);}
+  .opt-btn:disabled{cursor:default;}
+  .opt-btn.selected{border-color:var(--primary);background:var(--primary-soft);}
+  .opt-btn.correct{border-color:var(--good);background:var(--good-soft);color:var(--good);}
+  .opt-btn.wrong{border-color:var(--bad);background:var(--bad-soft);color:var(--bad);}
+  .check-btn{background:var(--primary);color:var(--on-primary);border:none;border-radius:12px;padding:10px 20px;font-weight:700;cursor:pointer;font-family:inherit;font-size:1rem;}
+  .check-btn:disabled{opacity:.6;cursor:default;}
+  .ghost-btn{background:none;border:2px solid var(--line);color:var(--muted);border-radius:12px;padding:8px 16px;font-weight:700;cursor:pointer;font-family:inherit;font-size:.95rem;}
+  .ghost-btn:disabled{opacity:.5;cursor:default;}
+  .center-row{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap;}
+  button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--primary);outline-offset:2px;}
+  /* pola do wpisywania */
+  .fields{display:grid;gap:10px;margin-top:12px;text-align:left;}
+  .field{display:flex;align-items:center;gap:6px 8px;flex-wrap:wrap;}
+  .field.block{display:grid;gap:4px;}
+  .field-label{font-weight:700;min-width:150px;}
+  .field-label .arrow{color:var(--muted);margin-left:4px;}
+  .field-label.num{min-width:48px;text-align:right;font-variant-numeric:tabular-nums;color:var(--primary-dark);}
+  .field.block .field-label,.field-label.inline{min-width:0;}
+  .field-text{font-weight:700;}
+  .field-tip{font-size:.85rem;color:var(--muted);font-weight:700;}
+  .answer-input{width:190px;max-width:100%;padding:8px 10px;font-size:1.06rem;border:2px solid var(--line);border-radius:12px;font-family:inherit;font-weight:700;background:var(--card);color:var(--ink);}
+  .answer-input.short{width:110px;}
+  .answer-input.wide{width:100%;}
+  .answer-input.correct{border-color:var(--good);background:var(--good-soft);}
+  .answer-input.half{border-color:var(--half);background:var(--half-soft);}
+  .answer-input.wrong{border-color:var(--bad);background:var(--bad-soft);}
+  .fix{font-size:.88rem;font-weight:800;color:var(--good);}
+  .fix.half-fix{color:var(--half);}
+  /* przyporządkowanie */
+  .sort-list{display:grid;gap:8px;margin-top:14px;text-align:left;}
+  .sort-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;border:2px solid var(--line);border-radius:14px;padding:8px 10px;background:var(--soft);}
+  .sort-row.correct{border-color:var(--good);background:var(--good-soft);}
+  .sort-row.wrong{border-color:var(--bad);background:var(--bad-soft);}
+  .sort-item{flex:1 1 200px;font-weight:700;min-width:0;}
+  .sort-cats{display:flex;gap:6px;flex-wrap:wrap;}
+  .cat-btn{border:2px solid var(--line);background:var(--card);border-radius:10px;padding:6px 10px;font-size:.9rem;font-weight:700;cursor:pointer;font-family:inherit;color:var(--ink);}
+  .cat-btn.selected{border-color:var(--primary);background:var(--primary-soft);}
+  .cat-btn.should{border-color:var(--good);border-style:dashed;background:var(--good-soft);}
+  .sort-row.wrong .cat-btn.selected{border-color:var(--bad);background:var(--bad-soft);color:var(--bad);}
+  .cat-btn:disabled{cursor:default;}
+  .match-select{font-family:inherit;font-size:.98rem;font-weight:700;padding:7px 8px;border-radius:10px;border:2px solid var(--line);background:var(--card);color:var(--ink);max-width:100%;}
+  .match-fix{font-size:.85rem;font-weight:800;color:var(--good);width:100%;}
+  /* kolejność */
+  .order-btn{position:relative;text-align:left;padding-left:44px;}
+  .order-btn .badge{position:absolute;left:10px;top:50%;transform:translateY(-50%);min-width:26px;height:26px;border-radius:13px;background:var(--line);color:var(--muted);display:flex;align-items:center;justify-content:center;font-size:.9rem;padding:0 6px;}
+  .order-btn.selected .badge{background:var(--primary);color:var(--on-primary);}
+  /* klikanie wyrazów */
+  .word-pick{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;justify-content:center;}
+  .word-btn{border:2px solid var(--line);background:var(--soft);border-radius:10px;padding:6px 10px;font-size:1.02rem;font-weight:700;cursor:pointer;font-family:inherit;color:var(--ink);}
+  .word-btn.selected{border-color:var(--primary);background:var(--primary-soft);}
+  .word-btn.correct{border-color:var(--good);background:var(--good-soft);color:var(--good);}
+  .word-btn.wrong{border-color:var(--bad);background:var(--bad-soft);color:var(--bad);}
+  .word-btn.missed{border-style:dashed;}
+  .word-btn:disabled{cursor:default;}
+  /* drzewo genealogiczne */
+  .tree{display:grid;gap:6px;margin:12px 0;padding:14px 10px;border-radius:16px;background:var(--soft);}
+  .tree-row{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;align-items:center;}
+  .tree-fam{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .tree-fam > div{display:grid;gap:6px;justify-items:center;}
+  .person{background:var(--card);border:2px solid var(--line);border-radius:10px;padding:4px 10px;font-weight:700;font-size:.92rem;}
+  .person.me{border-color:var(--blue);background:var(--blue-soft);color:var(--blue);}
+  .ring{color:var(--e1);font-weight:800;}
+  .down{color:var(--muted);font-size:.8rem;line-height:1;}
+  .tree-cap{font-size:.78rem;color:var(--muted);text-align:center;}
+  /* tekst do czytania */
+  .passage{text-align:left;background:var(--soft);border:2px solid var(--line);border-radius:16px;padding:0 16px;margin:4px 0 12px;}
+  .passage summary{cursor:pointer;font-weight:800;padding:12px 0;color:var(--primary-dark);}
+  .passage-body{max-height:min(46vh,400px);overflow-y:auto;padding:0 4px 12px 0;line-height:1.55;font-size:1rem;}
+  .passage-body p{margin:0 0 .55em;max-width:65ch;}
+  .passage-body b{color:var(--blue);}
+  .feedback{min-height:28px;margin-top:14px;font-weight:700;font-size:1.02rem;}
+  .feedback-good{color:var(--good);}
+  .feedback-half{color:var(--warn-ink);}
+  .feedback-bad{color:var(--bad);}
+  .hint-box{margin-top:10px;padding:10px 14px;background:var(--warn-soft);border:1px solid var(--warn-line);border-radius:12px;font-size:.92rem;font-weight:500;color:var(--warn-ink);text-align:left;line-height:1.45;}
+  .hint-box strong,.hint-box b{color:var(--warn-ink);}
+  footer{text-align:center;margin-top:20px;color:var(--muted);font-size:.85rem;}
+  h2{margin-top:0;color:var(--primary);}
+  /* wybór lekcji + wyniki */
+  .lesson-pick{display:grid;gap:6px;text-align:left;margin:10px 0 4px;}
+  .lesson-pick label{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:12px;background:var(--soft);border:2px solid var(--line);cursor:pointer;font-weight:700;}
+  .lesson-pick input{width:18px;height:18px;accent-color:var(--primary);flex:none;}
+  .lesson-pick .code{color:var(--primary-dark);font-variant-numeric:tabular-nums;}
+  .lesson-pick .cnt{margin-left:auto;font-size:.8rem;color:var(--muted);font-weight:500;white-space:nowrap;}
+  .pick-tools{display:flex;justify-content:space-between;align-items:center;font-size:.85rem;color:var(--muted);flex-wrap:wrap;gap:8px;}
+  .link-btn{background:none;border:none;color:var(--primary);font-weight:700;cursor:pointer;font-family:inherit;padding:0;}
+  .intro{text-align:left;line-height:1.5;margin:0;}
+  .breakdown{text-align:left;display:grid;gap:8px;margin:16px 0;}
+  .bd-row{display:grid;grid-template-columns:1fr auto;gap:4px 10px;align-items:center;font-size:.92rem;}
+  .bd-bar{grid-column:1 / -1;height:8px;background:var(--line);border-radius:6px;overflow:hidden;}
+  .bd-fill{height:100%;border-radius:6px;}
+  .bd-score{font-weight:700;font-variant-numeric:tabular-nums;}
+  .review{text-align:left;margin-top:8px;}
+  .review h3{font-size:1rem;margin:0 0 6px;}
+  .review ul{margin:0;padding-left:20px;line-height:1.5;font-size:.92rem;}
+  .result-grade{display:flex;align-items:center;justify-content:center;gap:14px;margin:4px 0 6px;}
+  .grade-num{width:64px;height:64px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:2.4rem;font-weight:800;color:var(--card);font-variant-numeric:tabular-nums;}
+  .grade-txt{display:grid;text-align:left;line-height:1.3;}
+  .grade-txt b{font-size:1.15rem;}
+  .grade-txt span{font-size:.85rem;color:var(--muted);}
+  @media (prefers-reduced-motion:reduce){ .primary-btn,.progress-fill{transition:none} }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <h1>📘 Sprawdzian z angielskiego</h1>
+    <p class="subtitle">Starter Unit i Unit 1 — Family and friends</p>
+    <div class="flag-bar" aria-hidden="true"><span style="background:var(--primary)"></span><span style="background:var(--line)"></span><span style="background:var(--blue)"></span></div>
+  </header>
+
+  <section id="start-screen" class="card">
+    <p class="intro">Sprawdzian powstał na podstawie podręcznika: <b>Starter Unit</b> (alfabet, liczby, kolory, klasa) i <b>Unit 1</b> (rodzina, <i>to be</i>, <i>my/your/his/her</i>, kraje i narodowości, przedstawianie, miejsca, wielkie litery, kraje anglojęzyczne). Słówka wpisujesz <b>po angielsku i po polsku</b>.</p>
+    <div class="rules">
+      <b>✍️ Liczy się pisownia!</b>
+      <ul>
+        <li>Każde wpisane słowo to <b>1 punkt</b>.</li>
+        <li>Brak <b>wielkiej litery</b> (np. <i>Polish</i>, <i>I</i>), <b>apostrofu</b> (np. <i>isn't</i>) albo <b>polskiej litery</b> (np. <i>żółty</i>) to <b>pół punktu</b>.</li>
+        <li>Inna literówka to 0 punktów.</li>
+      </ul>
+    </div>
+    <div class="full-box">
+      <button id="full-btn" class="primary-btn">📝 Sprawdzian – 40 minut</button>
+      <p id="full-info"></p>
+    </div>
+    <p class="or-line">Albo poćwicz wybrane lekcje (bez limitu czasu):</p>
+    <div class="pick-tools">
+      <span>Które lekcje ćwiczymy?</span>
+      <span><button class="link-btn" id="pick-all">zaznacz wszystkie</button> · <button class="link-btn" id="pick-none">odznacz</button></span>
+    </div>
+    <div class="lesson-pick" id="lesson-pick"></div>
+    <div class="start-btns">
+      <button id="start-btn" class="primary-btn gold-btn">Ćwicz wybrane lekcje</button>
+    </div>
+  </section>
+
+  <section id="quiz-screen" class="card" hidden>
+    <div class="progress-row">
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+      <span id="progress-text"></span>
+      <span id="timer" hidden></span>
+    </div>
+    <div class="score-row">Wynik: <span id="score-text">0</span>/<span id="score-total">0</span> pkt</div>
+    <div><span class="q-number" id="q-number"></span><span class="q-pts" id="q-pts"></span></div>
+    <div id="question-area"></div>
+    <div class="feedback" id="feedback"></div>
+    <button id="next-btn" class="primary-btn" hidden>Dalej ▶</button>
+  </section>
+
+  <section id="result-screen" class="card" hidden>
+    <h2 id="result-title"></h2>
+    <div class="result-grade" id="result-grade"></div>
+    <p id="result-desc"></p>
+    <div class="breakdown" id="breakdown"></div>
+    <div class="review" id="review"></div>
+    <button id="restart-btn" class="primary-btn">Wróć na start</button>
+  </section>
+
+  <footer>
+    <p>Na podstawie podręcznika do języka angielskiego dla klasy 4 — Starter Unit (0.1–0.3) i Unit 1 (1.1–1.7, Wordlist, Revision, Grammar).</p>
+  </footer>
+</div>
+
+<script>
+"use strict";
+
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+const pick = (arr,n) => shuffle(arr).slice(0,n);
+const rnd = (a,b) => a+Math.floor(Math.random()*(b-a+1));
+const esc = s => String(s).replace(/[&<>"]/g, ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
+const fmtPts = n => Number.isInteger(n) ? String(n) : n.toFixed(1).replace('.',',');
+const ptsWord = n => n===1 ? 'punkt' : (n>=2&&n<=4 ? 'punkty' : 'punktów');
+
+/* =========================================================
+   SPRAWDZANIE PISOWNI
+   Porównujemy wpis z każdą poprawną odpowiedzią i bierzemy najlepszy wynik:
+   ok – bez błędu; caps / apos / diac – drobny błąd (½ pkt); bad – inne słowo albo literówka (0 pkt)
+   ========================================================= */
+const norm = s => String(s).normalize('NFC')
+  .replace(/[’‘`´]/g,"'").replace(/[“”„"«»]/g,'')
+  .replace(/[.!?,;:]+/g,' ').replace(/\s*[-–—]\s*/g,'-')
+  .replace(/\s+/g,' ').trim();
+const loose = s => s.toLowerCase().replace(/'/g,'').replace(/-/g,' ').replace(/\s+/g,' ').trim();
+const stripPl = s => s.normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/ł/g,'l').replace(/Ł/g,'L');
+const isUpper = ch => ch!==ch.toLowerCase();
+
+function compare(v, A, f){
+  if(v===A) return 'ok';
+  if(v.toLowerCase()===A.toLowerCase()){
+    // te same litery, inna wielkość: brak wielkiej litery to zawsze błąd;
+    // zbędna wielka litera na początku jest w porządku, chyba że pole jest „strict" (np. polskie „hiszpański")
+    let wrong=false;
+    for(let i=0;i<A.length;i++){
+      if(A[i]===v[i]) continue;
+      if(isUpper(A[i])) wrong=true;
+      else if(i>0 || f.strict) wrong=true;
+    }
+    return wrong ? 'caps' : 'ok';
+  }
+  if(loose(v)===loose(A)) return 'apos';
+  if(stripPl(v.toLowerCase())===stripPl(A.toLowerCase()) || stripPl(loose(v))===stripPl(loose(A))) return 'diac';
+  return 'bad';
+}
+const RANK = {ok:3, caps:2, apos:2, diac:2, bad:0};
+function checkField(f, raw){
+  const v=norm(raw);
+  if(!v) return {res:'bad', ans:f.accepted[0]};
+  let best={res:'bad', ans:f.accepted[0]};
+  for(const a of f.accepted){
+    const r=compare(v, norm(a), f);
+    if(RANK[r]>RANK[best.res]) best={res:r, ans:a};
+    if(r==='ok') break;
+  }
+  if(best.res==='caps' && f.capsBad) best.res='capsBad';
+  return best;
+}
+const NOTES = {
+  capsEn:'<b>Wielkie litery:</b> po angielsku wielką literą piszemy imiona, nazwy państw i miast, <b>narodowości</b> (<i>Polish, British</i>), słowo <b>I</b> i początek zdania.',
+  capsPl:'<b>Wielkie litery po polsku:</b> nazwy państw piszemy wielką literą (<b>Hiszpania</b>, <b>Wielka Brytania</b>), ale przymiotniki od nich – małą (<b>hiszpański</b>, <b>brytyjski</b>). Po angielsku oba wielką: <i>Spain, Spanish</i>.',
+  apos:'<b>Apostrof i łącznik:</b> <i>I\'m, isn\'t, aren\'t, Granny\'s, Let\'s</i>, <i>twenty-one</i>.',
+  diac:'<b>Polskie znaki:</b> pamiętaj o ą, ć, ę, ł, ń, ó, ś, ź, ż!'
+};
+
+// Pola do wpisania. field: {label, pre, post, tip, accepted:[...], lang:'en'|'pl', strict, capsBad, size:'short'|'wide', block, num}
+function renderFields(container, fields, onAnswer){
+  const wrap=document.createElement('div'); wrap.className='fields';
+  fields.forEach((f,i)=>{
+    const row=document.createElement('div'); row.className='field'+(f.block?' block':'');
+    const lang=f.lang||'en';
+    const ph = f.placeholder ?? (f.pre||f.post ? '' : (lang==='en'?'po angielsku':'po polsku'));
+    row.innerHTML=
+      (f.label!=null?`<label class="field-label${f.num?' num':''}${(f.pre||f.post)&&!f.block?' inline':''}" for="f${i}">${f.label}${f.block||f.num||f.pre||f.post?'':'<span class="arrow">→</span>'}</label>`:'')+
+      (f.block?'<div class="field">':'')+
+      (f.pre?`<span class="field-text">${f.pre}</span>`:'')+
+      `<input type="text" id="f${i}" class="answer-input ${f.size||''}" lang="${lang}" placeholder="${ph}" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">`+
+      (f.post?`<span class="field-text">${f.post}</span>`:'')+
+      (f.tip?`<span class="field-tip">${f.tip}</span>`:'')+
+      `<span class="fix"></span>`+
+      (f.block?'</div>':'');
+    wrap.appendChild(row);
+  });
+  container.appendChild(wrap);
+  const r=document.createElement('div'); r.className='center-row';
+  const check=document.createElement('button'); check.className='check-btn'; check.textContent='Sprawdź';
+  r.appendChild(check); container.appendChild(r);
+  const inputs=[...wrap.querySelectorAll('input')];
+  inputs.forEach((inp,i)=>inp.addEventListener('keydown',e=>{
+    if(e.key!=='Enter') return;
+    e.preventDefault();
+    if(i<inputs.length-1) inputs[i+1].focus(); else check.click();
+  }));
+  check.onclick=()=>{
+    if(inputs.every(x=>!x.value.trim())){ inputs[0].focus(); return; }
+    lockAll(wrap); check.disabled=true;
+    let score=0; const notes=new Set();
+    fields.forEach((f,i)=>{
+      const {res,ans}=checkField(f, inputs[i].value);
+      const fix=inputs[i].parentElement.querySelector('.fix');
+      if(res==='ok'){ score+=1; inputs[i].classList.add('correct'); return; }
+      if(res==='bad'){ inputs[i].classList.add('wrong'); fix.textContent='➜ '+ans; return; }
+      if(res==='capsBad'){ inputs[i].classList.add('wrong'); fix.textContent='➜ '+ans; notes.add(NOTES.capsEn); return; }
+      score+=0.5; inputs[i].classList.add('half'); fix.classList.add('half-fix'); fix.textContent='½ ➜ '+ans;
+      if(res==='caps') notes.add((f.lang||'en')==='pl' ? NOTES.capsPl : NOTES.capsEn);
+      else notes.add(NOTES[res]);
+    });
+    onAnswer(score/fields.length, false, [...notes].join('<br>'));
+  };
+  setTimeout(()=>inputs[0].focus({preventScroll:true}),50);
+}
+
+/* =========================================================
+   TYPY PYTAŃ (każdy zwraca ułamek 0–1, a punkty liczy handleAnswer)
+   ========================================================= */
+function lockAll(wrap){ wrap.querySelectorAll('button,input,select').forEach(b=>b.disabled=true); }
+
+// Jedna poprawna odpowiedź. opt: {text|html, correct}
+function renderOptions(container, options, onAnswer, oneCol){
+  const wrap=document.createElement('div');
+  wrap.className='options'+(oneCol?' one-col':'');
+  options.forEach(opt=>{
+    const btn=document.createElement('button');
+    btn.className='opt-btn';
+    if(opt.html) btn.innerHTML=opt.html; else btn.textContent=opt.text;
+    btn.onclick=()=>{
+      lockAll(wrap);
+      btn.classList.add(opt.correct?'correct':'wrong');
+      if(!opt.correct) wrap.children[options.findIndex(o=>o.correct)].classList.add('correct');
+      onAnswer(opt.correct?1:0);
+    };
+    wrap.appendChild(btn);
+  });
+  container.appendChild(wrap);
+}
+const opts = (correct, ...wrong) => shuffle([{text:correct,correct:true}, ...wrong.map(t=>({text:t,correct:false}))]);
+
+// Przyporządkuj każdy element do jednej z kategorii. items: [{text|html, cat}]
+function renderSort(container, cats, items, onAnswer){
+  const list=document.createElement('div'); list.className='sort-list';
+  const picked=new Array(items.length).fill(null);
+  items.forEach((it,i)=>{
+    const row=document.createElement('div'); row.className='sort-row';
+    row.innerHTML=`<span class="sort-item">${it.html||esc(it.text)}</span><span class="sort-cats"></span>`;
+    const catsWrap=row.querySelector('.sort-cats');
+    cats.forEach((c,ci)=>{
+      const b=document.createElement('button'); b.className='cat-btn'; b.textContent=c;
+      b.onclick=()=>{ picked[i]=ci; [...catsWrap.children].forEach(x=>x.classList.remove('selected')); b.classList.add('selected'); check.disabled=picked.some(p=>p===null); };
+      catsWrap.appendChild(b);
+    });
+    list.appendChild(row);
+  });
+  container.appendChild(list);
+  const r=document.createElement('div'); r.className='center-row';
+  const check=document.createElement('button'); check.className='check-btn'; check.textContent='Sprawdź'; check.disabled=true;
+  r.appendChild(check); container.appendChild(r);
+  check.onclick=()=>{
+    lockAll(list); check.disabled=true;
+    let good=0;
+    items.forEach((it,i)=>{
+      const row=list.children[i];
+      if(picked[i]===it.cat){ good++; row.classList.add('correct'); }
+      else { row.classList.add('wrong'); row.querySelectorAll('.cat-btn')[it.cat].classList.add('should'); }
+    });
+    onAnswer(good/items.length);
+  };
+}
+
+// Dopasuj: do każdego elementu z lewej wybierz z listy element z prawej. pairs: [{l, r}]
+function renderMatch(container, pairs, onAnswer){
+  const rights=shuffle([...new Set(pairs.map(p=>p.r))]);
+  const list=document.createElement('div'); list.className='sort-list';
+  pairs.forEach((p,i)=>{
+    const row=document.createElement('div'); row.className='sort-row';
+    row.innerHTML=`<span class="sort-item">${p.l}</span><select class="match-select" aria-label="Dopasuj: ${esc(p.l.replace(/<[^>]+>/g,''))}"><option value="">— wybierz —</option>${rights.map(r=>`<option>${esc(r)}</option>`).join('')}</select><span class="match-fix"></span>`;
+    list.appendChild(row);
+  });
+  container.appendChild(list);
+  const selects=[...list.querySelectorAll('select')];
+  const r=document.createElement('div'); r.className='center-row';
+  const check=document.createElement('button'); check.className='check-btn'; check.textContent='Sprawdź'; check.disabled=true;
+  r.appendChild(check); container.appendChild(r);
+  selects.forEach(s=>s.addEventListener('change',()=>{ check.disabled=selects.some(x=>!x.value); }));
+  check.onclick=()=>{
+    lockAll(list); check.disabled=true;
+    let good=0;
+    pairs.forEach((p,i)=>{
+      const row=list.children[i];
+      if(selects[i].value===p.r){ good++; row.classList.add('correct'); }
+      else { row.classList.add('wrong'); row.querySelector('.match-fix').textContent='➜ '+p.r; }
+    });
+    onAnswer(good/pairs.length);
+  };
+}
+
+// Ułóż w kolejności. steps: tablica w poprawnej kolejności
+function renderOrder(container, steps, onAnswer){
+  const order=[];
+  const shuffled=shuffle(steps.map((t,i)=>({t,i})));
+  const wrap=document.createElement('div'); wrap.className='options one-col';
+  shuffled.forEach(s=>{
+    const b=document.createElement('button'); b.className='opt-btn order-btn';
+    b.innerHTML=`<span class="badge"></span>${s.t}`;
+    b.onclick=()=>{
+      if(b.classList.contains('selected')) return;
+      order.push(s.i); b.classList.add('selected'); b.querySelector('.badge').textContent=order.length;
+      check.disabled = order.length!==steps.length;
+    };
+    wrap.appendChild(b);
+  });
+  container.appendChild(wrap);
+  const r=document.createElement('div'); r.className='center-row';
+  const reset=document.createElement('button'); reset.className='ghost-btn'; reset.textContent='↺ Od nowa';
+  const check=document.createElement('button'); check.className='check-btn'; check.textContent='Sprawdź'; check.disabled=true;
+  r.append(reset,check); container.appendChild(r);
+  reset.onclick=()=>{ order.length=0; check.disabled=true; [...wrap.children].forEach(b=>{ b.classList.remove('selected'); b.querySelector('.badge').textContent=''; }); };
+  check.onclick=()=>{
+    lockAll(wrap); check.disabled=true; reset.disabled=true;
+    let good=0;
+    shuffled.forEach((s,k)=>{
+      const b=wrap.children[k];
+      const pos=order.indexOf(s.i);
+      b.classList.remove('selected');
+      if(pos===s.i){ good++; b.classList.add('correct'); } else b.classList.add('wrong');
+      b.querySelector('.badge').textContent = pos===s.i ? pos+1 : `${pos+1}→${s.i+1}`;
+    });
+    onAnswer(good===steps.length ? 1 : good/steps.length);
+  };
+}
+
+// Kliknij właściwe wyrazy. Zapis: *wyraz* = do kliknięcia
+const ws = s => s.split(' ').map(t=>({ t:t.replace(/\*/g,''), ok:t.includes('*') }));
+function renderWordPick(container, words, onAnswer){
+  const wrap=document.createElement('div'); wrap.className='word-pick';
+  const chosen=new Set();
+  words.forEach((w,i)=>{
+    const b=document.createElement('button'); b.type='button'; b.className='word-btn'; b.textContent=w.t;
+    b.onclick=()=>{ chosen.has(i)?chosen.delete(i):chosen.add(i); b.classList.toggle('selected'); check.disabled=!chosen.size; };
+    wrap.appendChild(b);
+  });
+  container.appendChild(wrap);
+  const r=document.createElement('div'); r.className='center-row';
+  const check=document.createElement('button'); check.className='check-btn'; check.textContent='Sprawdź'; check.disabled=true;
+  r.appendChild(check); container.appendChild(r);
+  check.onclick=()=>{
+    lockAll(wrap); check.disabled=true;
+    let hits=0, wrong=0; const need=words.filter(w=>w.ok).length;
+    words.forEach((w,i)=>{
+      const b=wrap.children[i]; b.classList.remove('selected');
+      if(chosen.has(i)&&w.ok){ b.classList.add('correct'); hits++; }
+      else if(chosen.has(i)){ b.classList.add('wrong'); wrong++; }
+      else if(w.ok) b.classList.add('correct','missed');
+    });
+    onAnswer(Math.max(0,(hits-wrong)/need));
+  };
+}
+
+function intro(container, html){ container.innerHTML = html; }
+const qi = t => `<p class="q-instruction">${t}</p>`;
+const sub = t => `<p class="q-sub">${t}</p>`;
+const box = words => `<div class="word-box">${words.map(w=>`<span>${w}</span>`).join('')}</div>`;
+const passage = (title, html, open=true) => `<details class="passage"${open?' open':''}><summary>📖 ${title}</summary><div class="passage-body">${html}</div></details>`;
+
+// Słówka do wpisania: pary [pokazane, poprawne (string albo tablica), opcje pola]
+const plEn = ([pl,en,o]) => ({label:pl, accepted:[].concat(en), lang:'en', ...o});
+const enPl = ([en,pl,o]) => ({label:`<span class="en" lang="en">${en}</span>`, accepted:[].concat(pl), lang:'pl', ...o});
+// polskie przymiotniki: wszystkie rodzaje (żółty / żółta / żółte, chiński / chińska / chińskie)
+const adj = s => s.endsWith('y') ? [s, s.slice(0,-1)+'a', s.slice(0,-1)+'e'] : [s, s.slice(0,-1)+'a', s+'e'];
+
+/* =========================================================
+   LEKCJE
+   ========================================================= */
+const LESSONS = [null,
+  {code:'0.1', name:'Alfabet i literowanie'},
+  {code:'0.2', name:'Liczby i kolory'},
+  {code:'0.3', name:'W klasie'},
+  {code:'1.1', name:'Rodzina'},
+  {code:'1.2', name:'To be (twierdzenia), my / your / his / her'},
+  {code:'1.3', name:'To be (przeczenia), kraje i narodowości'},
+  {code:'1.4', name:'Przedstawianie się'},
+  {code:'1.5', name:'Miejsca i czytanie'},
+  {code:'1.6–1.7', name:'Wielkie litery, kraje anglojęzyczne'},
+];
+const Q = [];
+const add = (lesson, q) => Q.push({lesson, max:1, ...q});
+
+/* ---------- 0.1 Alfabet i literowanie ---------- */
+const SPELL = [
+  ['Lucas','L – U – C – A – S',['L – U – K – A – S','L – O – O – K – A – S']],
+  ['Miranda','M – I – R – A – N – D – A',['M – I – R – E – N – D – A','M – Y – R – A – N – D – A']],
+  ['Newman','N – E – W – M – A – N',['N – I – U – M – A – N','N – E – W – M – E – N']],
+  ['Sophie','S – O – P – H – I – E',['S – O – F – I – E','S – O – P – H – Y']],
+  ['apple','A – double P – L – E',['A – P – L – E','A – double L – P – E']],
+  ['hello','H – E – double L – O',['H – E – L – O','H – A – double L – O']],
+  ['Megan','M – E – G – A – N',['M – E – D – Ż – A – N','M – A – G – A – N']],
+];
+add(1,{ full:true,
+  hint:'Literujemy każdą literę po kolei, a dwie takie same litery obok siebie to <b>double</b>: <i>apple</i> = A – double P – L – E (s. 5).',
+  render(c,a){
+    const [w,ok,bad]=pick(SPELL,1)[0];
+    intro(c, qi(`Które literowanie jest poprawne? <span class="en" lang="en">${w}</span>`)+sub('<i lang="en">How do you spell that?</i>'));
+    renderOptions(c, opts(ok,...bad), a, true);
+  }
+});
+add(1,{ full:true, max:4,
+  hint:'Słowa z ćwiczenia 5 na s. 5: <i>girl, box, sandwich, table, lion, fish</i>. Z ramki LOOK na s. 8: <i>an apple, an umbrella</i>.',
+  render(c,a){
+    const pool=[['pudełko','box'],['kanapka','sandwich'],['stół','table'],['lew','lion'],['ryba','fish'],['dziewczynka','girl'],['jabłko','apple'],['parasol','umbrella'],['jajko','egg'],['słoń','elephant']];
+    intro(c, qi('Napisz po angielsku.'));
+    renderFields(c, pick(pool,4).map(plEn), a);
+  }
+});
+add(1,{
+  hint:'<i>How do you spell that?</i> – Jak to się literuje? <i>What\'s your surname?</i> – Jak masz na nazwisko? <i>What\'s your name?</i> – Jak masz na imię?',
+  render(c,a){
+    const v=pick([
+      ['How do you spell that?','Jak to się literuje?',['Jak masz na imię?','Skąd jesteś?']],
+      ["What's your surname?",'Jak masz na nazwisko?',['Jak masz na imię?','Ile masz lat?']],
+      ["What's your name?",'Jak masz na imię?',['Jak masz na nazwisko?','Jak się masz?']],
+    ],1)[0];
+    intro(c, qi(`Co znaczy pytanie <span class="en" lang="en">${v[0]}</span>?`));
+    renderOptions(c, opts(v[1],...v[2]), a, true);
+  }
+});
+add(1,{
+  hint:'Alphabet Rap: <b>A B C D E F G, H I J K L M N O P, Q, R S T U V, W X Y Z</b>.',
+  render(c,a){
+    const letters=pick('ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),5).sort();
+    intro(c, qi('Ułóż litery w kolejności alfabetu. Klikaj od pierwszej.'));
+    renderOrder(c, letters, a);
+  }
+});
+
+/* ---------- 0.2 Liczby i kolory ---------- */
+const NUM=['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty'];
+add(2,{ full:true, max:4,
+  hint:'Uważaj: <i>four – fourteen</i>, ale <b>forty</b> (bez <i>u</i>); <i>five – fifteen – fifty</i>; <i>three – thirteen – thirty</i>; <i>eight – eighteen – eighty</i>; <i>twenty-one</i> z łącznikiem; 100 = <i>a hundred</i>.',
+  render(c,a){
+    const tricky=[[12,'twelve'],[13,'thirteen'],[15,'fifteen'],[40,'forty'],[50,'fifty'],[30,'thirty'],[80,'eighty'],[21,'twenty-one'],[100,['a hundred','one hundred']]];
+    const easy=[[8,'eight'],[11,'eleven'],[3,'three'],[14,'fourteen'],[19,'nineteen'],[20,'twenty'],[70,'seventy'],[90,'ninety'],[18,'eighteen'],[60,'sixty']];
+    const items=shuffle([...pick(tricky,3),...pick(easy,1)]);
+    intro(c, qi('Napisz liczby słownie po angielsku.'));
+    renderFields(c, items.map(([n,w])=>({label:String(n), num:true, accepted:[].concat(w)})), a);
+  }
+});
+add(2,{ full:true, max:3,
+  hint:'Najpierw policz, potem zapisz wynik słownie. Sprawdź końcówki: <i>-teen</i> (13–19) i <i>-ty</i> (20, 30…).',
+  render(c,a){
+    const eqs=[], used=new Set();
+    while(eqs.length<3){
+      const plus=Math.random()<.5, x=rnd(2,20), y=rnd(1,12), r=plus?x+y:x-y;
+      if(r<1||r>20||used.has(r)) continue;
+      used.add(r); eqs.push({label:`${NUM[x]} ${plus?'+':'–'} ${NUM[y]} =`, accepted:[NUM[r]], placeholder:'słownie'});
+    }
+    intro(c, qi('Wykonaj działania i zapisz wyniki <b>słownie</b> po angielsku.')+sub('Przykład: <i>six + six = twelve</i>'));
+    renderFields(c, eqs.map(e=>({...e, label:`<span class="en" lang="en">${e.label}</span>`})), a);
+  }
+});
+add(2,{
+  hint:'Liczby 13–19 kończą się na <b>-teen</b> (<i>thirteen</i>), a dziesiątki na <b>-ty</b> (<i>thirty</i>).',
+  render(c,a){
+    const [w,ok,bad,bad2]=pick([['forty','40','14','4'],['fifteen','15','50','5'],['thirteen','13','30','3'],['eighty','80','18','8'],['twenty','20','12','2'],['sixteen','16','60','6'],['nineteen','19','90','9'],['seventy','70','17','7']],1)[0];
+    intro(c, qi(`Która liczba to <span class="en" lang="en">${w}</span>?`));
+    renderOptions(c, opts(ok,bad,bad2), a);
+  }
+});
+const COLOURS = [['grey',adj('szary')],['purple',adj('fioletowy')],['brown',adj('brązowy')],['yellow',adj('żółty')],['orange',adj('pomarańczowy')],['pink',adj('różowy')],['green',adj('zielony')],['black',adj('czarny')],['white',adj('biały')],['red',adj('czerwony')],['blue',adj('niebieski')]];
+const COL_DIAC = ['brown','yellow','orange','pink','white'];
+add(2,{ full:true, max:4,
+  hint:'Kolory po polsku: <b>żółty, brązowy, różowy, biały, pomarańczowy</b>, szary, fioletowy, zielony, czarny, czerwony, niebieski. Uważaj na polskie znaki!',
+  render(c,a){
+    const items=shuffle([...pick(COLOURS.filter(x=>COL_DIAC.includes(x[0])),3), ...pick(COLOURS.filter(x=>!COL_DIAC.includes(x[0])),1)]);
+    intro(c, qi('Napisz po polsku, jaki to kolor.'));
+    renderFields(c, items.map(enPl), a);
+  }
+});
+add(2,{ max:3,
+  hint:'W podręczniku: <i>grey</i> (szary) – brytyjska pisownia przez <b>e</b>; <i>purple</i> – fioletowy; <i>brown</i> – brązowy.',
+  render(c,a){
+    const items=pick(COLOURS,3).map(([en,pl])=>[pl[0], en==='grey'?['grey','gray']:en]);
+    intro(c, qi('Napisz kolory po angielsku.'));
+    renderFields(c, items.map(plEn), a);
+  }
+});
+add(2,{ max:2,
+  hint:'Obrazek na s. 7: <i>The elephants are grey. The flowers are red. The zebras are black and white. The sky is blue. The oranges are orange. The lemons are yellow. The trees are green. The flamingoes are pink.</i>',
+  render(c,a){
+    const pairs=pick([['The elephants are','grey'],['The zebras are','black and white'],['The sky is','blue'],['The lemons are','yellow'],['The trees are','green'],['The flamingoes are','pink'],['The flowers are','red']],4);
+    intro(c, qi('Dopasuj kolory do zdań.'));
+    renderMatch(c, pairs.map(([l,r])=>({l:`<span class="en" lang="en">${l} …</span>`, r})), a);
+  }
+});
+
+/* ---------- 0.3 W klasie ---------- */
+add(3,{ full:true, max:2,
+  hint:'<b>an</b> stawiamy przed słowem, które zaczyna się samogłoską (a, e, i, o, u): <i>an apple, an egg, an orange, an umbrella, an elephant, an aunt, an uncle</i>. W innych wypadkach <b>a</b>: <i>a pencil, a book, a ruler</i>.',
+  render(c,a){
+    const A=['notebook','pencil','ruler','book','sandwich','pen','desk','chair','clock','bag','box'];
+    const AN=['apple','egg','elephant','orange','umbrella','aunt','uncle'];
+    const items=shuffle([...pick(A,3).map(t=>({text:'… '+t, cat:0})), ...pick(AN,3).map(t=>({text:'… '+t, cat:1}))]);
+    intro(c, qi('<span class="en" lang="en">a</span> czy <span class="en" lang="en">an</span>?'));
+    renderSort(c, ['a','an'], items, a);
+  }
+});
+add(3,{ full:true, max:4,
+  hint:'Liczba mnoga: zwykle dodajemy <b>-s</b> (<i>pencils, oranges</i>), a po <i>x, ch, s</i> dodajemy <b>-es</b>: <i>boxes, sandwiches</i>.',
+  render(c,a){
+    const es=[['box','boxes'],['sandwich','sandwiches'],['class','classes']];
+    const s=[['pencil','pencils'],['orange','oranges'],['notebook','notebooks'],['ruler','rulers'],['bag','bags'],['book','books'],['clock','clocks'],['chair','chairs']];
+    const nums=shuffle(['two','three','four','five','six','seven']);
+    const items=shuffle([...pick(es,2),...pick(s,2)]);
+    intro(c, qi('Napisz słowa w liczbie mnogiej.')+sub('Przykład: <i>a pencil → six pencils</i>'));
+    renderFields(c, items.map(([one,many],i)=>({label:`<span class="en" lang="en">${/^[aeiou]/.test(one)?'an':'a'} ${one}</span>`, pre:`<span lang="en">→ ${nums[i]}</span>`, accepted:[many], size:'short'})), a);
+  }
+});
+const BAG = [['linijka','ruler'],['gumka do mazania','rubber'],['nożyczki','scissors'],['temperówka','pencil sharpener'],['piórnik','pencil case'],['kredka',['coloured pencil','colored pencil']],['zeszyt','notebook'],['kosz na śmieci','bin'],['tablica','board'],['krzesło','chair'],['zegar','clock'],['ławka',['desk']],['długopis','pen'],['ołówek','pencil'],['plecak',['bag','schoolbag']]];
+add(3,{ full:true, max:4,
+  hint:'Ramki Vocabulary na s. 8: <i>book, coloured pencil, notebook, pen, pencil, pencil case, pencil sharpener, rubber, ruler, sandwich, scissors</i> oraz <i>bin, board, chair, clock, desk</i>.',
+  render(c,a){
+    intro(c, qi('Napisz po angielsku nazwy przedmiotów w klasie.'));
+    renderFields(c, pick(BAG,4).map(plEn), a);
+  }
+});
+add(3,{ full:true, max:2,
+  hint:'Nauczyciel wydaje polecenia: <i>Open your books. Sit down. Stand up. Work in pairs. Listen. Look.</i> Uczeń prosi i pyta: <i>Can you help me? Can you repeat that? I\'m ready. What\'s kredka in English?</i>',
+  render(c,a){
+    const T=['Open your books.','Close your books.','Sit down.','Stand up.','Work in pairs.','Listen to the story.','Look at the photo.','Write your name.'];
+    const S=['Can you help me?','Can you repeat that?',"I'm ready.","What's kredka in English?"];
+    const items=shuffle([...pick(T,3).map(t=>({html:`<span lang="en">${t}</span>`, cat:0})), ...pick(S,3).map(t=>({html:`<span lang="en">${t}</span>`, cat:1}))]);
+    intro(c, qi('Kto zwykle to mówi: nauczyciel czy uczeń?'));
+    renderSort(c, ['nauczyciel','uczeń'], items, a);
+  }
+});
+add(3,{
+  hint:'<i>Can you repeat that, please?</i> – Czy możesz powtórzyć? <i>Can you help me, please?</i> – Czy możesz mi pomóc? <i>What\'s kredka in English?</i> – Jak jest „kredka" po angielsku?',
+  render(c,a){
+    const all=['Can you repeat that, please?','Can you help me, please?',"What's kredka in English?",'Stand up, please!',"I'm ready!",'Open your books.'];
+    const v=pick([
+      ['Nie usłyszysz, co powiedział nauczyciel. Co mówisz?',0],
+      ['Potrzebujesz pomocy nauczyciela. Co mówisz?',1],
+      ['Nie wiesz, jak jest po angielsku „kredka". Co mówisz?',2],
+      ['Nauczyciel chce, żeby uczniowie wstali. Co mówi?',3],
+      ['Uczeń chce powiedzieć nauczycielowi, że jest gotowy. Co mówi?',4],
+    ],1)[0];
+    intro(c, qi(v[0]));
+    renderOptions(c, opts(all[v[1]], ...pick(all.filter((_,i)=>i!==v[1]),2)), a, true);
+  }
+});
+add(3,{ max:2,
+  hint:'Ćwiczenie 9 na s. 9: <i>Can you repeat that?</i> → <i>Yes, Tomas. Giraffe.</i>; <i>Can you help me, Miss?</i> → <i>Yes, Maria. How can I help you?</i>; <i>How do we say elefante?</i> → <i>We say elephant.</i>; <i>I\'m ready!</i> → <i>Good. Class, are you ready too?</i>; <i>What does amazing mean?</i> → <i>It means really good.</i>',
+  render(c,a){
+    const pairs=pick([
+      ['Can you repeat that, please?','Yes, Tomas. Giraffe. Giraffe. OK?'],
+      ['Can you help me, Miss?','Yes, Maria. How can I help you?'],
+      ['How do we say <i>elefante</i> in English?','We say elephant.'],
+      ["I'm ready!",'Good. Class, are you ready too?'],
+      ['What does <i>amazing</i> mean?','It means really good.'],
+    ],4);
+    intro(c, qi('Dopasuj odpowiedzi do zdań i pytań.'));
+    renderMatch(c, pairs.map(([l,r])=>({l:`<span lang="en">${l}</span>`, r})), a);
+  }
+});
+add(3,{
+  hint:'Jedna rzecz: <i>It\'s a pencil.</i> Wiele rzeczy: <i>They\'re pencils.</i> (bez <i>a</i>!).',
+  render(c,a){
+    const many=Math.random()<.5;
+    const [w,ws_]=pick([['pencil','pencils'],['book','books'],['ruler','rulers'],['notebook','notebooks']],1)[0];
+    intro(c, qi(many?`Na ławce leżą trzy przedmioty: ${w} ×3. Jak to powiesz?`:`Na ławce leży jeden przedmiot: ${w}. Jak to powiesz?`));
+    renderOptions(c, many ? opts(`They're ${ws_}.`,`It's a ${ws_}.`,`They're a ${w}.`) : opts(`It's a ${w}.`,`It's ${ws_}.`,`They're a ${w}.`), a, true);
+  }
+});
+
+/* ---------- 1.1 Rodzina ---------- */
+// Drzewo genealogiczne Marka z s. 10
+const TREE = `<div class="tree">
+  <div class="tree-row"><span class="person">John</span><span class="ring">⚭</span><span class="person">Agatha</span></div>
+  <div class="tree-cap">↓ dzieci: Julia i Paul</div>
+  <div class="tree-fam">
+    <div><div class="tree-row"><span class="person">Peter</span><span class="ring">⚭</span><span class="person">Julia</span></div><span class="down">↓</span><div class="tree-row"><span class="person">Tom</span><span class="person">Anna</span></div></div>
+    <div><div class="tree-row"><span class="person">Paul</span><span class="ring">⚭</span><span class="person">Rose</span></div><span class="down">↓</span><div class="tree-row"><span class="person me">Mark</span><span class="person">David</span><span class="person">Lucy</span></div></div>
+  </div>
+  <div class="tree-cap">⚭ = małżeństwo · chłopcy: Tom, Mark, David · dziewczynki: Anna, Lucy</div>
+</div>`;
+add(4,{ full:true, max:4,
+  hint:'Rodzina Marka: <i>parents</i> – Paul i Rose, <i>brother</i> – David, <i>sister</i> – Lucy, <i>aunt</i> – Julia, <i>uncle</i> – Peter, <i>cousins</i> – Tom i Anna, <i>grandfather</i> – John, <i>grandmother</i> – Agatha.',
+  render(c,a){
+    const pool=[
+      ["Peter is Mark's",'uncle'],["Julia is Mark's",'aunt'],["Tom is Mark's",'cousin'],["Anna is Mark's",'cousin'],
+      ["Lucy is Mark's",'sister'],["David is Mark's",'brother'],["John is Mark's",['grandfather','grandad']],
+      ["Agatha is Mark's",['grandmother','granny']],["Paul and Rose are Mark's",'parents'],["Anna is Julia's",'daughter'],
+      ["Mark is Paul's",'son'],["Paul is Julia's",'brother'],["Rose is Lucy's",['mother','mum']],
+    ];
+    intro(c, TREE+qi('Popatrz na drzewo i uzupełnij zdania po angielsku.'));
+    renderFields(c, pick(pool,4).map(([pre,ans])=>({pre:`<span lang="en">${pre}</span>`, post:'.', accepted:[].concat(ans), size:'short'})), a);
+  }
+});
+add(4,{ full:true, max:3,
+  hint:'Dzierżawcze <b>\'s</b>: <i>Paul = Mark\'s father</i> (tata Marka), <i>Lucy = Rose\'s daughter</i> (córka Rose). Apostrof przed <b>s</b>!',
+  render(c,a){
+    const pool=[
+      ['Granny',"It's",'birthday.',["Granny's","granny's"]],['Luke',"It's",'cake.',["Luke's"]],['Megan','Jason is','son.',["Megan's"]],
+      ['Dad','Megan is','sister.',["Dad's","dad's"]],['Tom','Anna is','sister.',["Tom's"]],['Ala','Maja and Adam are','parents.',["Ala's"]],
+      ['Rose','Lucy is','daughter.',["Rose's"]],['Jen','This is','bag.',["Jen's"]],
+    ];
+    intro(c, qi('Uzupełnij zdania formą dzierżawczą <b>\'s</b>.')+sub('Przykład: <i>Luke / cake → It\'s Luke\'s cake.</i>'));
+    renderFields(c, pick(pool,3).map(([who,pre,post,ans])=>({label:`(${who})`, pre:`<span lang="en">${pre}</span>`, post:`<span lang="en">${post}</span>`, accepted:ans, size:'short'})), a);
+  }
+});
+const FAM_PL = [['aunt',['ciocia','ciotka']],['uncle',['wujek','wuj','stryj','stryjek']],['cousin',['kuzyn','kuzynka']],['son','syn'],['granny',['babcia','babunia']],['grandad',['dziadek','dziadzio']],['parents','rodzice'],['brother','brat'],['sister','siostra'],['father',['ojciec','tata']],['mother',['matka','mama']]];
+add(4,{ full:true, max:4,
+  hint:'<i>aunt</i> – ciocia, <i>uncle</i> – wujek, <i>cousin</i> – kuzyn / kuzynka, <i>daughter</i> – <b>córka</b>, <i>son</i> – syn, <i>granny</i> – babcia, <i>grandad</i> – dziadek, <i>parents</i> – rodzice.',
+  render(c,a){
+    const items=shuffle([['daughter','córka'], ...pick(FAM_PL,3)]);
+    intro(c, qi('Napisz po polsku.'));
+    renderFields(c, items.map(enPl), a);
+  }
+});
+add(4,{ max:2,
+  hint:'<b>He</b>: father, dad, grandfather, grandad, son, brother, uncle. <b>She</b>: mother, mum, grandmother, granny, daughter, sister, aunt.',
+  render(c,a){
+    const he=['father','dad','grandfather','grandad','son','brother','uncle'], she=['mother','mum','grandmother','granny','daughter','sister','aunt'];
+    const items=shuffle([...pick(he,4).map(t=>({text:t,cat:0})), ...pick(she,4).map(t=>({text:t,cat:1}))]);
+    intro(c, qi('<span class="en" lang="en">He</span> czy <span class="en" lang="en">she</span>? Przyporządkuj członków rodziny.'));
+    renderSort(c, ['he','she'], items, a);
+  }
+});
+add(4,{ max:4,
+  hint:'Pełne słowa: <i>grandad, granny, uncle, aunt, cousin, sister, brother, parents, daughter</i>.',
+  render(c,a){
+    const pool=[['g _ a n d _ d','grandad'],['g r _ n _ y','granny'],['u n _ _ e','uncle'],['a _ _ t','aunt'],['c o _ _ i n','cousin'],['s _ s t _ r','sister'],['b _ _ t _ e r','brother'],['p _ r _ n t s','parents'],['d _ _ g h t e r','daughter']];
+    intro(c, qi('Uzupełnij brakujące litery. Wpisz <b>całe słowo</b>.'));
+    renderFields(c, pick(pool,4).map(([p,w])=>({label:`<span lang="en" style="letter-spacing:.06em">${p}</span>`, accepted:[w], size:'short', placeholder:''})), a);
+  }
+});
+add(4,{
+  hint:'Zdrobnienia: <i>father → dad, mother → mum, grandmother → granny, grandfather → grandad</i>.',
+  render(c,a){
+    intro(c, qi('Dopasuj zdrobnienia do słów.'));
+    renderMatch(c, shuffle([['father','dad'],['mother','mum'],['grandmother','granny'],['grandfather','grandad']]).map(([l,r])=>({l:`<span lang="en">${l}</span>`, r})), a);
+  }
+});
+
+/* ---------- 1.2 To be, my / your / his / her ---------- */
+const BIRTHDAY = `<p><i>Today is Sophie's birthday. She is seventy years old. Sophie is Jen and Alex's grandmother. They are at her house.</i></p>
+<p lang="en"><b>Sophie:</b> I'm so happy you're here.</p>
+<p lang="en"><b>Alex:</b> It's aunt Megan!<br><b>Megan:</b> Hello, Alex! Hold this, please! Be careful! It's Granny's birthday cake.<br><b>Alex:</b> It's OK. I've got it!</p>
+<p lang="en"><b>Megan:</b> Happy birthday, Mum! Here's your present.<br><b>Sophie:</b> Thank you, my darling. Where's your son?<br><b>Megan:</b> Jason is in Spain with his class. They're on a school trip. Here's a card from him.<br><b>Sophie:</b> Oh, it's a lovely card!<br><b>Dad:</b> Hello, sister!</p>
+<p lang="en"><b>Dad:</b> We're ready for the cake!<br><b>Mum:</b> Oh, no!</p>`;
+add(5,{ full:true, max:3,
+  hint:'<b>I am</b>; <b>he / she / it is</b> (też: <i>Jason is, my name is</i>); <b>we / you / they are</b> (też: <i>Alex and I are, Jen and Alex are</i>).',
+  render(c,a){
+    const am=[['I ___ ten.',0],['I ___ twelve years old.',0],['I ___ so happy!',0]];
+    const rest=[['You ___ ready.',2],["Jason ___ Jen's cousin.",1],['We ___ happy!',2],['It ___ a present for you.',1],["Jen and Alex ___ at their Granny's house.",2],['My name ___ Lian.',1],['Alex and I ___ best friends.',2],['She ___ nine.',1],['They ___ at her house.',2],['Hammy ___ my pet hamster.',1]];
+    const items=shuffle([...pick(am,1), ...pick(rest,5)]).map(([t,cat])=>({html:`<span lang="en">${t}</span>`, cat}));
+    intro(c, qi('Wybierz <span class="en" lang="en">am</span>, <span class="en" lang="en">is</span> albo <span class="en" lang="en">are</span>.'));
+    renderSort(c, ['am','is','are'], items, a);
+  }
+});
+add(5,{ full:true, max:3,
+  hint:'Formy skrócone: <i>I am → I\'m, you are → you\'re, he is → he\'s, she is → she\'s, it is → it\'s, we are → we\'re, they are → they\'re</i>. Apostrof zastępuje opuszczoną literę.',
+  render(c,a){
+    const pool=[['I am happy.',"I'm happy."],['You are ready.',"You're ready."],['It is a present.',"It's a present."],['We are friends.',"We're friends."],['She is nine.',"She's nine."],['They are at her house.',"They're at her house."],['He is twelve.',"He's twelve."],['I am here.',"I'm here."]];
+    intro(c, qi('Przepisz zdania, używając <b>skróconych form</b> czasownika <i>to be</i>.')+sub('Przykład: <i>You are ready. → You\'re ready.</i>'));
+    renderFields(c, pick(pool,3).map(([l,ans])=>({label:`<span lang="en">${l}</span>`, block:true, accepted:[ans], size:'wide'})), a);
+  }
+});
+add(5,{ full:true, max:2,
+  hint:'<b>I → my</b>, <b>you → your</b>, <b>she → her</b>, <b>he → his</b>. Przykład: <i>Jason is in Spain with his class.</i>',
+  render(c,a){
+    const pool=[
+      ["Alex: 'Granny, here's ___ birthday card!'",1],["Dad: 'It's Sophie's birthday. We are at ___ house.'",3],
+      ["Sophie: 'I'm very happy! ___ family is here!'",0],["Megan: 'Jason is in Spain with ___ class.'",2],
+      ["Alex: '___ birthday cake is in this box, Granny.'",1],["Lucas is from Spain. ___ hobbies are music and Maths.",2],
+      ["Jen is ten. ___ hobby is making cupcakes.",3],["I'm Lian. ___ hobby is skateboarding.",0],
+    ];
+    intro(c, qi('Wybierz <span class="en" lang="en">my, your, his</span> albo <span class="en" lang="en">her</span>.'));
+    renderSort(c, ['my','your','his','her'], pick(pool,5).map(([t,cat])=>({html:`<span lang="en">${t}</span>`, cat})), a);
+  }
+});
+add(5,{ max:2,
+  hint:'Babcia ma na imię <b>Sophie</b> i ma 70 lat. Rodzina jest <b>w domu babci</b>. Jason jest <b>w Hiszpanii</b> na wycieczce szkolnej. Megan jest siostrą taty (<i>Hello, sister!</i>).',
+  render(c,a){
+    const pool=[["Granny's name is Sophie.",0],["They are at Jen and Alex's house.",1],['Jason is at home.',1],["Dad is Aunt Megan's brother.",0],['Granny is seventy years old.',0],['Jason is in Spain with his class.',0],["Megan is Granny's son.",1],['The card is from Jason.',0]];
+    intro(c, passage("The Newmans – It's Granny's birthday!", BIRTHDAY)+qi('Przeczytaj historyjkę. Czy zdania są zgodne z prawdą?'));
+    renderSort(c, ['true','false'], pick(pool,4).map(([t,cat])=>({html:`<span lang="en">${t}</span>`, cat})), a);
+  }
+});
+add(5,{ max:2,
+  hint:'<i>Be careful!</i> – Bądź ostrożny! <i>Hold this, please.</i> – Potrzymaj to, proszę. <i>I\'ve got it!</i> – Zajmę się tym. <i>Let\'s have a break.</i> – Zróbmy sobie przerwę. <i>my darling</i> – mój drogi / moja droga.',
+  render(c,a){
+    const pairs=pick([['Be careful!','Bądź ostrożny!'],['Hold this, please.','Potrzymaj to, proszę.'],["I've got it!",'Zajmę się tym.'],['Happy birthday!','Wszystkiego najlepszego z okazji urodzin!'],["Let's have a break.",'Zróbmy sobie przerwę.'],['my darling','moja droga / mój drogi']],4);
+    intro(c, qi('Dopasuj polskie znaczenia do wyrażeń.'));
+    renderMatch(c, pairs.map(([l,r])=>({l:`<span lang="en">${l}</span>`, r})), a);
+  }
+});
+add(5,{ max:4,
+  hint:'Wordlist 1.2: <i>birthday</i> – urodziny, <i>present</i> – prezent, <i>cake</i> – ciasto, <i>happy</i> – szczęśliwy, <i>classmate</i> – kolega z klasy, <i>friend</i> – przyjaciel, <i>mess</i> – bałagan, <i>yummy</i> – pyszny, <i>lovely</i> – uroczy, <i>card</i> – kartka, <i>school trip</i> – wycieczka szkolna.',
+  render(c,a){
+    const pool=[['urodziny','birthday'],['prezent','present'],['ciasto','cake'],['tort urodzinowy','birthday cake'],['szczęśliwy','happy'],['kolega z klasy','classmate'],['przyjaciel','friend'],['bałagan','mess'],['pyszny','yummy'],['uroczy','lovely'],['kartka z życzeniami','card'],['wycieczka szkolna','school trip'],['najlepszy przyjaciel','best friend']];
+    intro(c, qi('Napisz po angielsku.'));
+    renderFields(c, pick(pool,4).map(plEn), a);
+  }
+});
+
+/* ---------- 1.3 To be (przeczenia), kraje i narodowości ---------- */
+const ALBUM = `<p lang="en"><b>Kit:</b> Dug? You are a superhero. What about your family?</p>
+<p lang="en"><b>Dug:</b> Well, my parents aren't superheroes. Uncle Roberto is a superhero. He's French.<br><b>Kit:</b> Roberto? It isn't a French name.<br><b>Dug:</b> Sorry, you're right. Uncle Roberto isn't French. He's Spanish. Aunt Gigi is French.</p>
+<p lang="en"><b>Dug:</b> Here I am with Mum and Dad.<br><b>Kit:</b> You aren't happy in the photo!<br><b>Dug:</b> No, I'm not! I'm hungry!</p>
+<p lang="en"><b>Dug:</b> Dad's British and Mum is Polish.<br><b>Kit:</b> OK, but … What about you? …</p>
+<p lang="en"><b>Superdug:</b> No idea, Kit! Bye now!<br><b>Kit:</b> Bye, Superdug! Be careful!</p>`;
+add(6,{ full:true, max:3,
+  hint:'Przeczenie: <i>I\'m not</i> (nigdy „I amn\'t"), <i>he / she / it isn\'t</i>, <i>we / you / they aren\'t</i>. Pełne formy: <i>am not, is not, are not</i>.',
+  render(c,a){
+    const pool=[
+      ['Dug is French.',["Dug isn't French.","Dug is not French."]],
+      ['Kit is a dog.',["Kit isn't a dog.","Kit is not a dog."]],
+      ["Dug's parents are superheroes.",["Dug's parents aren't superheroes.","Dug's parents are not superheroes."]],
+      ['You are in the photo.',["You aren't in the photo.","You are not in the photo.","You're not in the photo."]],
+      ['Dug is hungry.',["Dug isn't hungry.","Dug is not hungry."]],
+      ['We are Spanish.',["We aren't Spanish.","We are not Spanish.","We're not Spanish."]],
+      ['My best friend is my cat.',["My best friend isn't my cat.","My best friend is not my cat."]],
+      ["It's my birthday.",["It isn't my birthday.","It is not my birthday.","It's not my birthday."]],
+    ];
+    const I=pick([['I am happy.',["I'm not happy.","I am not happy."]],["I'm fifteen.",["I'm not fifteen.","I am not fifteen."]]],1);
+    intro(c, qi('Napisz zdania <b>przeczące</b>.')+sub('Przykład: <i>Dug is French. → Dug isn\'t French.</i>'));
+    renderFields(c, shuffle([...I, ...pick(pool,2)]).map(([l,ans])=>({label:`<span lang="en">${l}</span>`, block:true, accepted:ans, size:'wide'})), a);
+  }
+});
+const NATIONS = [['Spain','Spanish','Hiszpania','hiszpański'],['France','French','Francja','francuski'],['Italy','Italian','Włochy','włoski'],['Poland','Polish','Polska','polski'],['China','Chinese','Chiny','chiński'],['the UK','British','Wielka Brytania','brytyjski'],['the USA','American','Stany Zjednoczone','amerykański']];
+add(6,{ full:true, max:4,
+  hint:'<i>Spain – Spanish, France – French, Italy – Italian, Poland – Polish, China – Chinese, the UK – British, the USA – American</i>. Po angielsku narodowości piszemy <b>wielką literą</b>!',
+  render(c,a){
+    intro(c, qi('Napisz narodowość po angielsku.')+sub('Przykład: <i>Spain → Spanish</i>'));
+    renderFields(c, pick(NATIONS,4).map(([cty,nat])=>({label:`<span lang="en">${cty}</span>`, accepted:[nat]})), a);
+  }
+});
+add(6,{ full:true, max:4,
+  hint:'Po polsku: <b>Hiszpania</b> (państwo – wielką literą), ale <b>hiszpański</b> (przymiotnik – małą). Tak samo: Włochy – włoski, Chiny – chiński, Wielka Brytania – brytyjski, Stany Zjednoczone – amerykański.',
+  render(c,a){
+    const ns=shuffle(NATIONS);
+    const items=shuffle([...ns.slice(0,2).map(n=>[n[0], [n[2]]]), ...ns.slice(2,4).map(n=>[n[1], adj(n[3]), {strict:true}])]);
+    intro(c, qi('Napisz po polsku. Uważaj na wielkie litery i polskie znaki!'));
+    renderFields(c, items.map(enPl), a);
+  }
+});
+add(6,{
+  hint:'Szukamy słowa z innej grupy: <b>państwa</b> (<i>Spain, the UK, China…</i>) albo <b>narodowości</b> (<i>Chinese, Italian, American…</i>).',
+  render(c,a){
+    const [odd,...rest]=pick([['Chinese','Spain','the UK'],['Italian','the USA','the UK'],['American','France','Poland'],['China','Spanish','British'],['the USA','French','Polish']],1)[0];
+    intro(c, qi('Który wyraz nie pasuje do pozostałych?'));
+    renderOptions(c, opts(odd,...rest), a);
+  }
+});
+add(6,{ max:4,
+  hint:'Jeśli zdanie nie jest prawdziwe, piszemy <b>isn\'t</b>, a potem prawdziwą narodowość: <i>Aunt Teresa isn\'t Spanish. She\'s Polish.</i> Jeśli jest prawdziwe – <b>is</b>.',
+  render(c,a){
+    // [kto, skąd jest, narodowość w zdaniu, czy zdanie prawdziwe, zaimek, prawdziwa narodowość]
+    const yes=[['Cousin Lulu','France','French',true,'She','French'],['Granny Flossie','the USA','American',true,'She','American']];
+    const no=[['Aunt Teresa','Poland','Spanish',false,'She','Polish'],['Grandad Umberto','Italy','Chinese',false,'He','Italian'],['Cousin Chen','China','British',false,'He','Chinese'],['Uncle Roberto','Spain','French',false,'He','Spanish']];
+    const items=shuffle([...pick(yes,1),...pick(no,1)]);
+    intro(c, qi('Rodzina Duga. W nawiasie jest kraj, z którego pochodzi każda osoba. Wpisz <b>is</b> albo <b>isn\'t</b>, a potem prawdziwą narodowość.')+sub('Przykład: <i>Aunt Teresa (Poland): Aunt Teresa isn\'t Spanish. She\'s Polish.</i>'));
+    const fields=[];
+    items.forEach(([who,cty,nat,truth,pr,real])=>{
+      fields.push({label:`<span lang="en">${who} (${cty}):</span>`, block:true, pre:`<span lang="en">${who}</span>`, post:`<span lang="en">${nat}.</span>`, accepted:truth?['is']:["isn't",'is not'], size:'short', placeholder:''});
+      fields.push({pre:`<span lang="en">${pr}'s</span>`, post:'.', accepted:[real], size:'short', placeholder:''});
+    });
+    renderFields(c, fields, a);
+  }
+});
+add(6,{ max:2,
+  hint:'Wujek Roberto jest superbohaterem i jest <b>Hiszpanem</b>. Ciocia Gigi jest Francuzką. Rodzice Duga nie są superbohaterami. Dug na zdjęciu jest głodny, nie wesoły. Tata jest Brytyjczykiem, a mama – Polką.',
+  render(c,a){
+    const pool=[['Uncle Roberto is a superhero.',0],['Aunt Gigi is French.',0],["Dug's parents are superheroes.",1],['Dug is happy in the photo.',1],["Dug's mum is British.",1],["Dug's dad is British.",0],['Uncle Roberto is French.',1],['Dug is hungry in the photo.',0]];
+    intro(c, passage("The Terrific Two – Dug's family album", ALBUM)+qi('Przeczytaj historyjkę. Czy zdania są zgodne z prawdą?'));
+    renderSort(c, ['true','false'], pick(pool,4).map(([t,cat])=>({html:`<span lang="en">${t}</span>`, cat})), a);
+  }
+});
+add(6,{ max:2,
+  hint:'<i>Help!</i> – Pomocy! <i>No idea.</i> – Nie mam pojęcia. <i>Sorry.</i> – Przepraszam. <i>You\'re right.</i> – Masz rację. <i>What about you?</i> – A co z tobą? <i>Bye now!</i> – Do zobaczenia! <i>hungry</i> – głodny.',
+  render(c,a){
+    const pairs=pick([['Help!','Pomocy!'],['No idea.','Nie mam pojęcia.'],['Sorry.','Przepraszam.'],["You're right.",'Masz rację.'],['What about you?','A co z tobą?'],['Bye now!','Do zobaczenia!'],['hungry','głodny'],['in the photo','na zdjęciu']],4);
+    intro(c, qi('Dopasuj polskie znaczenia.'));
+    renderMatch(c, pairs.map(([l,r])=>({l:`<span lang="en">${l}</span>`, r})), a);
+  }
+});
+
+/* ---------- 1.4 Przedstawianie się ---------- */
+add(7,{ full:true, max:2,
+  hint:'Najpierw przedstawiamy osoby sobie nawzajem (<i>X, this is…</i>), potem jedna mówi <i>Nice to meet you</i>, a druga odpowiada <i>Nice to meet you too</i>.',
+  render(c,a){
+    const d=pick([
+      ['Adam: Desi, this is my cousin, Lisa.','Adam: Lisa, this is Desi. He\'s my best friend.','Lisa: Hello, Desi. Nice to meet you.','Desi: Nice to meet you too, Lisa.'],
+      ['Jen: Mum, this is Lucas. He\'s our new neighbour.','Jen: Lucas, this is my mum.','Mum: Hello, Lucas. Nice to meet you.','Lucas: Nice to meet you too, Mrs Newman.'],
+    ],1)[0];
+    intro(c, qi('Ułóż dialog we właściwej kolejności. Klikaj od pierwszej wypowiedzi.'));
+    renderOrder(c, d.map(t=>`<span lang="en">${t}</span>`), a);
+  }
+});
+add(7,{ full:true, max:4,
+  hint:'<i>Mum, this is David. <b>He</b> is my friend. David, <b>this</b> is my mum.</i> – <i>Hello, Mrs Smith. <b>Nice</b> to meet you.</i> – <i>Nice to <b>meet</b> you too, David.</i> Zdanie zaczynamy wielką literą.',
+  render(c,a){
+    intro(c, qi('Uzupełnij dialog wyrazami z ramki.')+box(['He','meet','Nice','this']));
+    renderFields(c, [
+      {label:'<span lang="en">Jamie:</span>', pre:'<span lang="en">Mum, this is David.</span>', post:'<span lang="en">is my friend.</span>', accepted:['He'], size:'short'},
+      {pre:'<span lang="en">David,</span>', post:'<span lang="en">is my mum.</span>', accepted:['this'], size:'short'},
+      {label:'<span lang="en">David:</span>', pre:'<span lang="en">Hello, Mrs Smith.</span>', post:'<span lang="en">to meet you.</span>', accepted:['Nice'], size:'short'},
+      {label:'<span lang="en">Mum:</span>', pre:'<span lang="en">Nice to</span>', post:'<span lang="en">you too, David.</span>', accepted:['meet'], size:'short'},
+    ].map(f=>({...f, placeholder:''})), a);
+  }
+});
+add(7,{
+  hint:'Gdy ktoś się przedstawia albo kogoś przedstawiamy, odpowiadamy <i>Hello… Nice to meet you.</i> Na <i>Nice to meet you</i> odpowiadamy <i>Nice to meet you too.</i>',
+  render(c,a){
+    const v=pick([
+      ["Hello, I'm George.",'Nice to meet you, George.',['Very well, thanks.',"I've got it."]],
+      ['Mum, this is Sam.','Hello, Sam.',["He's my classmate.",'Hold this, please.']],
+      ['Kate, this is my sister, Lisa.','Hi, Lisa. Nice to meet you.',['Be careful!',"She's my friend."]],
+      ['Nice to meet you, Anna.','Nice to meet you too.',["That's nice.",'Thank you.']],
+    ],1)[0];
+    intro(c, qi(`Wybierz poprawną odpowiedź.<br><span lang="en">A: ${v[0]}<br>B: …</span>`));
+    renderOptions(c, opts(v[1],...v[2]), a, true);
+  }
+});
+add(7,{ max:3,
+  hint:'<i>Nice to meet you.</i> – Miło cię poznać. <i>Nice to meet you too.</i> – Ciebie także miło poznać. <i>He\'s my classmate.</i> – To mój kolega z klasy. <i>Let\'s go.</i> – Chodźmy. <i>neighbour</i> – sąsiad.',
+  render(c,a){
+    const pool=[
+      ['Miło cię poznać.',['Nice to meet you.']],['Ciebie także miło poznać.',['Nice to meet you too.']],
+      ['Chodźmy.',["Let's go."]],['To mój kolega z klasy.',["He's my classmate.",'He is my classmate.']],
+      ['Lucas, to jest moja mama.',['Lucas, this is my mum.','Lucas, this is my mom.']],
+      ['Ona jest moją przyjaciółką.',["She's my friend.",'She is my friend.']],
+    ];
+    intro(c, qi('Napisz po angielsku.'));
+    renderFields(c, pick(pool,3).map(([pl,ans])=>({label:pl, block:true, accepted:ans, size:'wide'})), a);
+  }
+});
+add(7,{ max:3,
+  hint:'Wordlist 1.4: <i>neighbour</i> – sąsiad (brytyjska pisownia z <b>u</b>), <i>bag</i> – plecak, torba, <i>famous</i> – sławny, <i>kids</i> – dzieciaki.',
+  render(c,a){
+    const pool=[['sąsiad',['neighbour','neighbor']],['plecak',['bag','schoolbag']],['sławny','famous'],['dzieciaki','kids']];
+    intro(c, qi('Napisz po angielsku.'));
+    renderFields(c, pick(pool,3).map(plEn), a);
+  }
+});
+
+/* ---------- 1.5 Miejsca i czytanie ---------- */
+const JAMIE = `<p lang="en"><b>I'm Jamie! I'm twelve. I'm from Manchester in the UK.</b> – <i>My favourite photos</i></p>
+<p lang="en">1. This is my family: Mum, Dad, my sister Olive and me. I'm twelve and Olive is fourteen. We're on holiday in Italy. My grandfather Antonio (my dad's father) is Italian, but my dad is British.</p>
+<p lang="en">2. My cousin Gina and I are in this photo. It's a really old photo. I'm six and Gina is five. We're in the park near Gina's house. Yuki is in the photo too. He's Gina's dog. He's big and friendly.</p>
+<p lang="en">3. This is my favourite photo. I'm not in this photo. You can see my great-grandmother Harriet (my grandmother's mum). It's her birthday. She's eighty years old. All her family and friends are in the garden.</p>`;
+const PLACES = [['w domu','at home'],['w szkole','at school'],['na przyjęciu',['at a party','at the party']],['w ogrodzie','in the garden'],['w parku','in the park'],['na wakacjach','on holiday'],['na zdjęciu','in the photo']];
+add(8,{ full:true, max:3,
+  hint:'Miejsca z s. 17: <b>at</b> home, <b>at</b> school, <b>at</b> a party, <b>in</b> the garden, <b>in</b> the park, <b>on</b> holiday.',
+  render(c,a){
+    intro(c, qi('Napisz po angielsku (z przyimkiem <i>at / in / on</i>).'));
+    renderFields(c, pick(PLACES,3).map(plEn), a);
+  }
+});
+add(8,{ max:2,
+  hint:'<b>at</b> home, <b>at</b> school, <b>at</b> a party; <b>in</b> the garden, <b>in</b> the park, <b>in</b> the photo; <b>on</b> holiday.',
+  render(c,a){
+    const items=shuffle([['___ holiday',2], ...pick([['___ home',0],['___ school',0],['___ a party',0],['___ the garden',1],['___ the park',1],['___ the photo',1]],5)]);
+    intro(c, qi('Wybierz <span class="en" lang="en">at, in</span> albo <span class="en" lang="en">on</span>.'));
+    renderSort(c, ['at','in','on'], items.map(([t,cat])=>({html:`<span lang="en">${t}</span>`, cat})), a);
+  }
+});
+add(8,{ full:true, max:4,
+  hint:'Z tekstu: Gina to <i>cousin</i> Jamiego, Yuki to jej <i>dog</i>, Olive to <i>sister</i>, dziadek Antonio jest z <i>Italy</i>, prababcia ma na imię <i>Harriet</i>, Jamie jest z <i>Manchester</i>.',
+  render(c,a){
+    const pool=[
+      ["Gina is Jamie's",'.',['cousin']],["Gina's",'is Yuki.',['dog']],["Olive is Jamie's",'.',['sister']],
+      ['Antonio is from','.',['Italy']],['','is Jamie\'s great-grandmother.',['Harriet']],["Antonio is Jamie's",'.',['grandfather','grandad']],
+      ['Jamie is from','in the UK.',['Manchester']],['Olive is','years old.',['fourteen','14']],
+    ];
+    intro(c, passage('Reading – My favourite photos', JAMIE)+qi('Przeczytaj tekst i uzupełnij zdania. W każdej luce brakuje jednego wyrazu.'));
+    renderFields(c, pick(pool,4).map(([pre,post,ans])=>({pre:pre?`<span lang="en">${pre}</span>`:'', post:`<span lang="en">${post}</span>`, accepted:ans, size:'short', placeholder:''})), a);
+  }
+});
+add(8,{ max:2,
+  hint:'Jamie ma 12 lat, Olive – 14. Rodzina jest na wakacjach we <b>Włoszech</b>. Tata jest Brytyjczykiem, dziadek Antonio – Włochem. Yuki jest <b>duży</b>. Prababcia Harriet ma 80 lat, a Jamiego nie ma na tym zdjęciu.',
+  render(c,a){
+    const pool=[['Jamie is twelve.',0],['Olive is fourteen.',0],["Jamie's family is on holiday in France.",1],["Jamie's dad is Italian.",1],["Yuki is Gina's dog.",0],['Yuki is small.',1],['Harriet is eighty years old.',0],['Jamie is in the photo with Harriet.',1],['Jamie is from Manchester.',0],['Gina is six in the old photo.',1]];
+    intro(c, passage('Reading – My favourite photos', JAMIE)+qi('Czy zdania są zgodne z tekstem?'));
+    renderSort(c, ['true','false'], pick(pool,5).map(([t,cat])=>({html:`<span lang="en">${t}</span>`, cat})), a);
+  }
+});
+add(8,{ max:3,
+  hint:'Wordlist 1.5: <i>favourite</i> – ulubiony, <i>near</i> – blisko, <i>too</i> – <b>też</b>, <i>great-grandmother</i> – prababcia, <i>on holiday</i> – na wakacjach, <i>at a party</i> – na <b>przyjęciu</b>.',
+  render(c,a){
+    const pool=[['favourite',adj('ulubiony')],['near',['blisko','obok','niedaleko']],['too',['też','także','również']],['great-grandmother','prababcia'],['on holiday','na wakacjach'],['at a party',['na przyjęciu','na imprezie']],['in the garden','w ogrodzie']];
+    intro(c, qi('Napisz po polsku.'));
+    renderFields(c, pick(pool,3).map(enPl), a);
+  }
+});
+
+/* ---------- 1.6–1.7 Wielkie litery, kraje anglojęzyczne ---------- */
+const WHO = `<p lang="en"><b>The UK</b><br>The capital city of the United Kingdom, or UK, is London. The UK is four different countries: England, Wales, Scotland and Northern Ireland. There are about 69 million people in the UK and English is the official language.</p>
+<p lang="en"><b>The USA</b><br>The USA is short for the United States of America. The capital of the USA is Washington. There are 340 million people in the USA. They speak English, but about 44 million people speak Spanish too.</p>
+<p lang="en"><b>Australia</b><br>27 million people live in Australia. Its capital city is Canberra, and Sydney is its biggest city. Most people speak English in Australia. Here's an interesting fact: when it's winter in the UK and the USA, it is summer in Australia.</p>`;
+const ALEX = `<p lang="en"><b>Me and my best friend</b><br>My name's Alex. I'm twelve and I'm from the UK. I'm British. My best friend is Lian. She's twelve too. Lian is from the UK. Lian's dad is British. Lian's mum and granny are Chinese.</p>`;
+add(9,{ full:true, max:2,
+  hint:'Wielką literą piszemy: <b>początek zdania</b>, <b>imiona</b> (Jack), <b>nazwy państw</b> (France) i <b>narodowości</b> (Italian) oraz zaimek <b>I</b>.',
+  render(c,a){
+    const pool=[
+      ["my best friend is jack. i'm from france.","My best friend is Jack. I'm from France."],
+      ['giorgia and toni are italian.','Giorgia and Toni are Italian.'],
+      ["lian's mum is chinese.","Lian's mum is Chinese."],
+      ["my name's alex and i'm british.","My name's Alex and I'm British."],
+      ['kasia is polish. she is from poland.','Kasia is Polish. She is from Poland.'],
+      ['lucas is from spain.','Lucas is from Spain.'],
+      ["jamie's grandad is italian.","Jamie's grandad is Italian."],
+    ];
+    intro(c, qi('Przepisz zdania, poprawiając <b>wielkie litery</b>.'));
+    renderFields(c, pick(pool,2).map(([l,ans])=>({label:`<span lang="en">${l}</span>`, block:true, accepted:[ans], size:'wide', capsBad:true, placeholder:''})), a);
+  }
+});
+add(9,{
+  hint:'Po angielsku wielką literą: początek zdania, imiona, nazwy miast i państw, narodowości i <b>I</b> (ja).',
+  render(c,a){
+    const s=pick([
+      '*my* cousin *anna* and *i* are from *spain* but we live in *poland*',
+      '*lian* is *british* but her mum and granny are *chinese*',
+      '*jamie* is from *manchester* and his grandad *antonio* is *italian*',
+      '*my* best friend is *tom* and *i* think he is *american*',
+    ],1)[0];
+    intro(c, qi('Kliknij wszystkie wyrazy, które trzeba napisać <b>wielką literą</b>.'));
+    renderWordPick(c, ws(s), a);
+  }
+});
+add(9,{
+  hint:'Po angielsku narodowość wielką literą (<i>Spanish</i>). Po polsku nazwa państwa wielką (<b>Hiszpania</b>), ale przymiotnik i „po hiszpańsku" małą.',
+  render(c,a){
+    const v = Math.random()<.5
+      ? ['Które zdanie po angielsku jest zapisane poprawnie?',"My friend Lucas is Spanish. He's from Spain.",["My friend Lucas is spanish. He's from Spain.","My friend lucas is Spanish. He's from spain.","my friend Lucas is Spanish. he's from Spain."]]
+      : ['Które zdanie po polsku jest zapisane poprawnie?','Lucas jest z Hiszpanii i mówi po hiszpańsku.',['Lucas jest z hiszpanii i mówi po Hiszpańsku.','Lucas jest z Hiszpanii i mówi po Hiszpańsku.','lucas jest z Hiszpanii i mówi po hiszpańsku.']];
+    intro(c, qi(v[0]));
+    renderOptions(c, opts(v[1],...v[2]), a, true);
+  }
+});
+add(9,{ full:true, max:2,
+  hint:'Stolice: Wielka Brytania – <b>London</b>, USA – <b>Washington</b>, Australia – <b>Canberra</b> (a największe miasto to Sydney). The UK = England, Wales, Scotland, Northern Ireland. W USA wiele osób mówi po hiszpańsku. Gdy w UK jest zima, w Australii jest lato.',
+  render(c,a){
+    const pairs=pick([
+      ['The capital city of the UK is','London'],['The capital city of the USA is','Washington'],['The capital city of Australia is','Canberra'],
+      ['The biggest city in Australia is','Sydney'],['Scotland and Wales are in','the UK'],['About 44 million people speak Spanish in','the USA'],
+      ["When it's winter in the UK, in Australia it's",'summer'],
+    ],4);
+    intro(c, passage('Get Culture – Who speaks English?', WHO, false)+qi('Dopasuj zakończenia zdań.'));
+    renderMatch(c, pairs.map(([l,r])=>({l:`<span lang="en">${l} …</span>`, r})), a);
+  }
+});
+add(9,{ max:2,
+  hint:'<b>it\'s</b> = it is (<i>It\'s Australia.</i>), <b>its</b> = jego / jej (<i>Its capital is Canberra.</i>).',
+  render(c,a){
+    const pool=[['Australia is big. ___ capital is Canberra.',1],["___ Australia.",0],['This is my dog. ___ name is Yuki.',1],['___ my birthday today!',0],['Look at the UK. ___ capital is London.',1],['___ a lovely card!',0]];
+    intro(c, qi('<span class="en" lang="en">It\'s</span> czy <span class="en" lang="en">its</span>?'));
+    renderSort(c, ["It's","Its"], pick(pool,4).map(([t,cat])=>({html:`<span lang="en">${t}</span>`, cat})), a);
+  }
+});
+add(9,{ max:3,
+  hint:'Wordlist 1.6–1.7: <i>capital city</i> – stolica, <i>Scotland</i> – Szkocja, <i>Wales</i> – Walia, <i>England</i> – Anglia, <i>Northern Ireland</i> – <b>Irlandia Północna</b>, <i>official language</i> – <b>język urzędowy</b>, <i>interesting</i> – <b>interesujący</b>, <i>spell</i> – literować.',
+  render(c,a){
+    const pool=[['capital city','stolica'],['Scotland','Szkocja'],['Wales','Walia'],['England','Anglia'],['Northern Ireland','Irlandia Północna'],['official language','język urzędowy'],['interesting',[...adj('interesujący'),...adj('ciekawy')]],['spell',['literować','przeliterować']],['famous',[...adj('sławny'),...adj('słynny')]]];
+    intro(c, qi('Napisz po polsku.'));
+    renderFields(c, pick(pool,3).map(enPl), a);
+  }
+});
+add(9,{ max:3,
+  hint:'Alex ma 12 lat i jest Brytyjczykiem (<i>British</i>). Lian też ma 12 lat. Jej tata jest Brytyjczykiem, a mama i babcia – Chinkami (<i>Chinese</i>).',
+  render(c,a){
+    const pool=[['Alex is','years old.',['twelve','12']],['Alex is','.',['British']],['Lian is','years old.',['twelve','12']],["Lian's dad is",'.',['British']],["Lian's mum and granny are",'.',['Chinese']],["Alex's best friend is",'.',['Lian']]];
+    intro(c, passage("Alex's blog", ALEX)+qi('Przeczytaj wpis Alexa i uzupełnij zdania.'));
+    renderFields(c, pick(pool,3).map(([pre,post,ans])=>({pre:`<span lang="en">${pre}</span>`, post:`<span lang="en">${post}</span>`, accepted:ans, size:'short', placeholder:''})), a);
+  }
+});
+
+/* =========================================================
+   STEROWANIE
+   ========================================================= */
+const $ = id => document.getElementById(id);
+const startScreen=$('start-screen'), quizScreen=$('quiz-screen'), resultScreen=$('result-screen');
+const questionArea=$('question-area'), feedback=$('feedback'), nextBtn=$('next-btn');
+const PRAISE = ['Świetnie! ✅','Brawo! 🎉','Dokładnie tak! 👍','Super! ⭐','Well done! 🙌','Excellent! 🏆'];
+
+const state = { list:[], index:0, score:0, total:0, perLesson:{}, review:[] };
+const sumMax = list => list.reduce((s,q)=>s+q.max,0);
+
+// wybór lekcji
+const pickEl=$('lesson-pick');
+for(let l=1;l<LESSONS.length;l++){
+  const qs=Q.filter(q=>q.lesson===l);
+  pickEl.insertAdjacentHTML('beforeend',`<label><input type="checkbox" value="${l}" checked> <span><span class="code">${LESSONS[l].code}</span> ${LESSONS[l].name}</span><span class="cnt">${qs.length} zad. · ${sumMax(qs)} pkt</span></label>`);
+}
+const boxes=()=>[...pickEl.querySelectorAll('input')];
+function refreshStart(){ $('start-btn').disabled = !boxes().some(b=>b.checked); }
+pickEl.addEventListener('change',refreshStart);
+$('pick-all').onclick=()=>{ boxes().forEach(b=>b.checked=true); refreshStart(); };
+$('pick-none').onclick=()=>{ boxes().forEach(b=>b.checked=false); refreshStart(); };
+
+// Pełny sprawdzian: zadania oznaczone „full" zawsze, resztę losujemy do limitu na lekcję.
+// 25 zadań, ok. 70 punktów – tyle, żeby zmieścić się w 40 minutach.
+const FULL_PLAN = {1:2, 2:3, 3:4, 4:3, 5:3, 6:3, 7:2, 8:2, 9:3};
+const FULL_MINUTES = 40;
+function buildFull(){
+  const list=[];
+  for(let l=1;l<LESSONS.length;l++){
+    const set=Q.filter(q=>q.lesson===l && q.full);
+    set.push(...shuffle(Q.filter(q=>q.lesson===l && !q.full)).slice(0, Math.max(0,(FULL_PLAN[l]||0)-set.length)));
+    list.push(...shuffle(set));
+  }
+  return list;
+}
+const fullSample=buildFull();
+$('full-info').innerHTML=`Wszystkie lekcje naraz, jak na prawdziwym sprawdzianie: <b>${fullSample.length} zadań</b>, około <b>${sumMax(fullSample)} punktów</b>. Masz <b>${FULL_MINUTES} minut</b> – po tym czasie sprawdzian się kończy, a niezrobione zadania liczą się jako 0 pkt.`;
+
+let timerId=null;
+function stopTimer(){ clearInterval(timerId); timerId=null; $('timer').hidden=true; }
+function startTimer(min){
+  const end=Date.now()+min*60000, el=$('timer');
+  el.hidden=false; el.className='';
+  const tick=()=>{
+    const left=Math.max(0, Math.round((end-Date.now())/1000));
+    el.textContent=`⏱ ${Math.floor(left/60)}:${String(left%60).padStart(2,'0')}`;
+    if(left<=300) el.className='low';
+    if(left===0){ el.className='out'; clearInterval(timerId); timerId=null; state.timeUp=true; showResults(); }
+  };
+  tick(); timerId=setInterval(tick,1000);
+}
+
+function startQuiz(lessons, list){
+  const chosen=new Set(lessons);
+  state.list=[];
+  if(list) state.list=list;
+  else for(let l=1;l<LESSONS.length;l++) if(chosen.has(l)) state.list.push(...shuffle(Q.filter(q=>q.lesson===l)));
+  state.full=!!list; state.timeUp=false; state.done=0;
+  stopTimer(); if(state.full) startTimer(FULL_MINUTES);
+  state.index=0; state.score=0; state.total=sumMax(state.list); state.perLesson={}; state.review=[];
+  state.list.forEach(q=>{ state.perLesson[q.lesson]=state.perLesson[q.lesson]||{ok:0,total:0}; state.perLesson[q.lesson].total+=q.max; });
+  startScreen.hidden=true; resultScreen.hidden=true; quizScreen.hidden=false;
+  $('score-total').textContent=state.total;
+  showQuestion();
+}
+
+function showQuestion(){
+  const q=state.list[state.index], total=state.list.length;
+  $('progress-fill').style.width=(state.index/total*100)+'%';
+  $('progress-text').textContent=`Zadanie ${state.index+1} z ${total}`;
+  $('score-text').textContent=fmtPts(state.score);
+  $('q-number').textContent=`Lekcja ${LESSONS[q.lesson].code} · ${LESSONS[q.lesson].name}`;
+  $('q-pts').textContent=`${q.max} ${ptsWord(q.max)}`;
+  feedback.textContent=''; feedback.className='feedback';
+  nextBtn.hidden=true;
+  questionArea.innerHTML='';
+  let answered=false;
+  q.render(questionArea, (frac,noHint,note)=>{ if(answered) return; answered=true; handleAnswer(frac,q,noHint,note); });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// frac: 0–1; punkty zaokrąglamy w dół do połówek
+function handleAnswer(frac,q,noHint,note){
+  const pts = Math.floor(Math.max(0,Math.min(1,frac))*q.max*2+1e-9)/2;
+  state.done++;
+  state.score+=pts; state.perLesson[q.lesson].ok+=pts;
+  $('score-text').textContent=fmtPts(state.score);
+  if(pts<q.max){
+    const t=questionArea.querySelector('.q-instruction');
+    state.review.push({lesson:q.lesson, text:t?t.textContent:LESSONS[q.lesson].name, pts, max:q.max});
+  }
+  const noteHTML = note ? `<div class="hint-box">✏️ ${note}</div>` : '';
+  if(pts===q.max){
+    feedback.innerHTML=PRAISE[Math.floor(Math.random()*PRAISE.length)]+noteHTML;
+    feedback.className='feedback feedback-good';
+  } else {
+    const head = pts>0 ? `Częściowo dobrze: ${fmtPts(pts)} z ${q.max} pkt.` : 'Niepoprawnie.';
+    feedback.innerHTML = head + (noHint||!q.hint ? '' : `<div class="hint-box">💡 <strong>Wyjaśnienie:</strong> ${q.hint}</div>`) + noteHTML;
+    feedback.className='feedback '+(pts>0?'feedback-half':'feedback-bad');
+  }
+  nextBtn.hidden=false;
+  nextBtn.focus({preventScroll:true});
+}
+
+function goNext(){
+  state.index++;
+  if(state.index>=state.list.length) showResults(); else showQuestion();
+}
+
+// Skala ocen: do 29% – 1, 30–49% – 2, 50–74% – 3, 75–84% – 4, 85–97% – 5, powyżej 97% – 6
+function schoolGrade(pct){
+  if(pct<30) return {n:1,name:'niedostateczny',color:'var(--bad)'};
+  if(pct<50) return {n:2,name:'dopuszczający',color:'var(--e1)'};
+  if(pct<75) return {n:3,name:'dostateczny',color:'var(--e1)'};
+  if(pct<85) return {n:4,name:'dobry',color:'var(--good)'};
+  if(pct<=97) return {n:5,name:'bardzo dobry',color:'var(--good)'};
+  return {n:6,name:'celujący',color:'var(--primary)'};
+}
+
+function showResults(){
+  const timeUp=state.timeUp; stopTimer();
+  quizScreen.hidden=true; resultScreen.hidden=false;
+  const total=state.total, s=state.score;
+  $('result-title').textContent=`Wynik: ${fmtPts(s)} / ${total} pkt`;
+  const pct=s/total*100, g=schoolGrade(pct);
+  $('result-grade').innerHTML=`<span class="grade-num" style="background:${g.color}">${g.n}</span><span class="grade-txt"><b>${g.name}</b><span>${Math.round(pct)}% punktów</span></span>`;
+  let desc;
+  if(s===total) desc='Perfect! Wszystko bezbłędnie! 🏆';
+  else if(s>=total*0.75) desc='Great job! Świetna robota! 👏';
+  else if(s>=total*0.5) desc='Good! Jeszcze trochę powtórki i będzie super! 💪';
+  else desc='Powtórz słówka z Wordlist (s. 20) i ramki Get Grammar – na pewno pójdzie lepiej! 📚';
+  if(timeUp) desc=`⏰ Czas minął! Zrobione zadania: ${state.done} z ${state.list.length}. Pozostałe liczą się jako 0 pkt. ` + desc;
+  $('result-desc').textContent=desc;
+  const bd=$('breakdown'); bd.innerHTML='';
+  Object.keys(state.perLesson).sort((x,y)=>x-y).forEach(l=>{
+    const {ok,total:t}=state.perLesson[l], p=ok/t;
+    const color = p>=0.75 ? 'var(--good)' : p>=0.5 ? 'var(--e1)' : 'var(--bad)';
+    bd.insertAdjacentHTML('beforeend',`<div class="bd-row"><span>${LESSONS[l].code} ${LESSONS[l].name}</span><span class="bd-score">${fmtPts(ok)}/${t}</span><div class="bd-bar"><div class="bd-fill" style="width:${p*100}%;background:${color}"></div></div></div>`);
+  });
+  $('review').innerHTML = state.review.length
+    ? `<h3>Do powtórki:</h3><ul>${state.review.map(r=>`<li>${esc(LESSONS[r.lesson].code)}: ${esc(r.text)} <span style="color:var(--muted)">(${fmtPts(r.pts)}/${r.max})</span></li>`).join('')}</ul>`
+    : '';
+}
+
+$('full-btn').onclick=()=>startQuiz([], buildFull());
+$('start-btn').onclick=()=>startQuiz(boxes().filter(b=>b.checked).map(b=>+b.value));
+$('restart-btn').onclick=()=>{ resultScreen.hidden=true; startScreen.hidden=false; };
+nextBtn.onclick=goNext;
+</script>
+</body>
+</html>
