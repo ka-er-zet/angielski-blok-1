@@ -573,11 +573,11 @@ add(1,{
   }
 });
 add(1,{
-  hint:'Alphabet Rap: <b>A B C D E F G, H I J K L M N O P, Q, R S T U V, W X Y Z</b>.',
+  hint:'Najczęściej mylone: <b>A</b> [ej], <b>E</b> [i:], <b>I</b> [aj], <b>G</b> [dżi], <b>J</b> [dżej], <b>H</b> [ejcz], <b>R</b> [a:], <b>Y</b> [łaj], <b>W</b> [dabl ju].',
   render(c,a){
-    const letters=pick('ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),5).sort();
-    intro(c, qi('Ułóż litery w kolejności alfabetu. Klikaj od pierwszej.'));
-    renderOrder(c, letters, a);
+    const pool=[['ej','A'],['i:','E'],['aj','I'],['dżi','G'],['dżej','J'],['ejcz','H'],['a:','R'],['ju','U'],['łaj','Y'],['dabl ju','W'],['kju','Q'],['kej','K']];
+    intro(c, qi('Ktoś literuje słowo. Jaką literę słyszysz?')+sub('Wymowa zapisana po polsku.'));
+    renderMatch(c, pick(pool,4).map(([l,r])=>({l:`„${l}”`, r})), a);
   }
 });
 
@@ -796,7 +796,7 @@ const BIRTHDAY = `<p><i>Today is Sophie's birthday. She is seventy years old. So
 <p lang="en"><b>Alex:</b> It's aunt Megan!<br><b>Megan:</b> Hello, Alex! Hold this, please! Be careful! It's Granny's birthday cake.<br><b>Alex:</b> It's OK. I've got it!</p>
 <p lang="en"><b>Megan:</b> Happy birthday, Mum! Here's your present.<br><b>Sophie:</b> Thank you, my darling. Where's your son?<br><b>Megan:</b> Jason is in Spain with his class. They're on a school trip. Here's a card from him.<br><b>Sophie:</b> Oh, it's a lovely card!<br><b>Dad:</b> Hello, sister!</p>
 <p lang="en"><b>Dad:</b> We're ready for the cake!<br><b>Mum:</b> Oh, no!</p>`;
-add(5,{ full:true, max:3,
+add(5,{ max:3,
   hint:'<b>I am</b>; <b>he / she / it is</b> (też: <i>Jason is, my name is</i>); <b>we / you / they are</b> (też: <i>Alex and I are, Jen and Alex are</i>).',
   render(c,a){
     const am=[['I ___ ten.',0],['I ___ twelve years old.',0],['I ___ so happy!',0]];
@@ -807,6 +807,29 @@ add(5,{ full:true, max:3,
   }
 });
 add(5,{ full:true, max:3,
+  hint:'<b>I am</b>; <b>he / she / it is</b> (też: <i>my friend is, her family is</i>); <b>we / you / they are</b> (też: <i>her two brothers are</i>).',
+  render(c,a){
+    const [name,gaps]=pick([
+      ['Maria',[['I','thirteen.','am'],['I','from the USA.','am'],['My best friend','Isabel.','is'],['Her family','English.','is'],['We','classmates.','are'],['Her two brothers','my friends too.','are']]],
+      ['Lucas',[['I','eleven.','am'],['I','from Spain.','am'],['My best friend','Jen.','is'],['Her brother','Alex.','is'],['We','neighbours.','are'],['Jen and Alex','in my class.','are']]],
+      ['Lian',[['I','twelve.','am'],['My mum','Chinese.','is'],['My dad','British.','is'],['We','from London.','are'],['My cousins','in China.','are'],['Their house','near a park.','is']]],
+    ],1)[0];
+    intro(c, qi(`Przeczytaj profil i uzupełnij go, używając <span class="en" lang="en">am</span>, <span class="en" lang="en">are</span> lub <span class="en" lang="en">is</span>.`)+sub(`<span lang="en">My name's ${name}.</span>`));
+    renderFields(c, gaps.map(([pre,post,ans])=>({pre:`<span lang="en">${pre}</span>`, post:`<span lang="en">${post}</span>`, accepted:[ans], size:'short', placeholder:''})), a);
+  }
+});
+add(5,{ full:true, max:2,
+  hint:'Szukaj, co pasuje gramatycznie: po <i>my, your, best</i> potrzebny jest rzeczownik (<i>birthday, friend</i>), a po <i>is / isn\'t</i> – reszta zdania.',
+  render(c,a){
+    const pairs=pick([
+      [["Jane's best",'friend is her neighbour.'],['Your brother is','in my class.'],["It's my",'birthday today!'],["That isn't",'your schoolbag.'],['His cousin','George is eleven.']],
+      [['My name','is Lucas.'],['Jason is in Spain','with his class.'],["Megan is Dad's",'sister.'],['Jen and Alex are',"at Granny's house."],['Happy','birthday, Mum!']],
+    ],1)[0];
+    intro(c, qi('Połącz połówki zdań.'));
+    renderMatch(c, shuffle(pairs).map(([l,r])=>({l:`<span lang="en">${l}</span>`, r})), a);
+  }
+});
+add(5,{ max:3,
   hint:'Formy skrócone: <i>I am → I\'m, you are → you\'re, he is → he\'s, she is → she\'s, it is → it\'s, we are → we\'re, they are → they\'re</i>. Apostrof zastępuje opuszczoną literę.',
   render(c,a){
     const pool=[['I am happy.',"I'm happy."],['You are ready.',"You're ready."],['It is a present.',"It's a present."],['We are friends.',"We're friends."],['She is nine.',"She's nine."],['They are at her house.',"They're at her house."],['He is twelve.',"He's twelve."],['I am here.',"I'm here."]];
