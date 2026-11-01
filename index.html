@@ -535,23 +535,6 @@ const Q = [];
 const add = (lesson, q) => Q.push({lesson, max:1, ...q});
 
 /* ---------- 0.1 Alfabet i literowanie ---------- */
-const SPELL = [
-  ['Lucas','L – U – C – A – S',['L – U – K – A – S','L – O – O – K – A – S']],
-  ['Miranda','M – I – R – A – N – D – A',['M – I – R – E – N – D – A','M – Y – R – A – N – D – A']],
-  ['Newman','N – E – W – M – A – N',['N – I – U – M – A – N','N – E – W – M – E – N']],
-  ['Sophie','S – O – P – H – I – E',['S – O – F – I – E','S – O – P – H – Y']],
-  ['apple','A – double P – L – E',['A – P – L – E','A – double L – P – E']],
-  ['hello','H – E – double L – O',['H – E – L – O','H – A – double L – O']],
-  ['Megan','M – E – G – A – N',['M – E – D – Ż – A – N','M – A – G – A – N']],
-];
-add(1,{ full:true,
-  hint:'Literujemy każdą literę po kolei, a dwie takie same litery obok siebie to <b>double</b>: <i>apple</i> = A – double P – L – E (s. 5).',
-  render(c,a){
-    const [w,ok,bad]=pick(SPELL,1)[0];
-    intro(c, qi(`Które literowanie jest poprawne? <span class="en" lang="en">${w}</span>`)+sub('<i lang="en">How do you spell that?</i>'));
-    renderOptions(c, opts(ok,...bad), a, true);
-  }
-});
 add(1,{ full:true, max:4,
   hint:'Słowa z ćwiczenia 5 na s. 5: <i>girl, box, sandwich, table, lion, fish</i>. Z ramki LOOK na s. 8: <i>an apple, an umbrella</i>.',
   render(c,a){
@@ -570,14 +553,6 @@ add(1,{
     ],1)[0];
     intro(c, qi(`Co znaczy pytanie <span class="en" lang="en">${v[0]}</span>?`));
     renderOptions(c, opts(v[1],...v[2]), a, true);
-  }
-});
-add(1,{
-  hint:'Najczęściej mylone: <b>A</b> [ej], <b>E</b> [i:], <b>I</b> [aj], <b>G</b> [dżi], <b>J</b> [dżej], <b>H</b> [ejcz], <b>R</b> [a:], <b>Y</b> [łaj], <b>W</b> [dabl ju].',
-  render(c,a){
-    const pool=[['ej','A'],['i:','E'],['aj','I'],['dżi','G'],['dżej','J'],['ejcz','H'],['a:','R'],['ju','U'],['łaj','Y'],['dabl ju','W'],['kju','Q'],['kej','K']];
-    intro(c, qi('Ktoś literuje słowo. Jaką literę słyszysz?')+sub('Wymowa zapisana po polsku.'));
-    renderMatch(c, pick(pool,4).map(([l,r])=>({l:`„${l}”`, r})), a);
   }
 });
 
@@ -674,7 +649,7 @@ add(3,{ full:true, max:4,
 add(3,{ full:true, max:2,
   hint:'Nauczyciel wydaje polecenia: <i>Open your books. Sit down. Stand up. Work in pairs. Listen. Look.</i> Uczeń prosi i pyta: <i>Can you help me? Can you repeat that? I\'m ready. What\'s kredka in English?</i>',
   render(c,a){
-    const T=['Open your books.','Close your books.','Sit down.','Stand up.','Work in pairs.','Listen to the story.','Look at the photo.','Write your name.'];
+    const T=['Open your books.','Close your books.','Sit down.','Stand up.','Work in pairs.','Listen to the story.','Look at the photo.','Read the text.','Write your name.'];
     const S=['Can you help me?','Can you repeat that?',"I'm ready.","What's kredka in English?"];
     const items=shuffle([...pick(T,3).map(t=>({html:`<span lang="en">${t}</span>`, cat:0})), ...pick(S,3).map(t=>({html:`<span lang="en">${t}</span>`, cat:1}))]);
     intro(c, qi('Kto zwykle to mówi: nauczyciel czy uczeń?'));
